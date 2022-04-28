@@ -1,0 +1,46 @@
+package com.fantastik4.applicationtier.rabbitmqserver.server;
+
+import com.fantastik4.applicationtier.model.Guard;
+import com.fantastik4.applicationtier.services.GuardService;
+import com.google.gson.Gson;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+
+@Component
+public class GuardMQServer {
+    private GuardService guardService;
+    private Gson gson;
+
+    public GuardMQServer(GuardService guardService) {
+        this.guardService = guardService;
+        gson = new Gson();
+    }
+
+    @RabbitListener(queues = "guard.add")
+    public String addPGuard(Message message) {
+        String jsonGuard = new String(message.getBody());
+        System.out.println(jsonGuard);
+        Guard newGuard = gson.fromJson(jsonGuard, Guard.class);
+        System.out.println(newGuard);
+        return gson.toJson(guardService.addPGuard(newGuard));
+    }
+
+    @RabbitListener(queues = "guard.remove")
+    public String removeGuard(Message message) {
+        String jsonGuard = new String(message.getBody());
+        Guard releaseGuard = gson.fromJson(jsonGuard, Guard.class);
+        return gson.toJson(guardService.removeGuard(releaseGuard));
+    }
+
+    @RabbitListener(queues = "guard.get")
+    public String getGuard(Message message) {
+        Long guardId = gson.fromJson(new String(message.getBody()), Long.class);
+        Guard guard = guardService.getGuard(guardId);
+        if (guard!=null) return gson.toJson(guard);
+        return "failed to fetch guard-" +guardId;
+    }
+}
