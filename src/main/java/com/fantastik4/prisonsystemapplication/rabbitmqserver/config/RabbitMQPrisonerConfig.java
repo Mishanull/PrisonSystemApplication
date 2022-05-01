@@ -18,12 +18,12 @@ public class RabbitMQPrisonerConfig {
 
     //adding prisoner queues
     @Bean
-    public Queue prisonerQueue(){
+    public Queue prisonerAddQueue(){
         return new Queue("prisoner.add");
     }
     @Bean
     public Binding prisonerBinding(){
-        return BindingBuilder.bind(prisonerQueue()).to(prisonerExchange()).with("prisoner.add");
+        return BindingBuilder.bind(prisonerAddQueue()).to(prisonerExchange()).with("prisoner.add");
     }
 
 
@@ -40,10 +40,20 @@ public class RabbitMQPrisonerConfig {
     //getting prisoner queues
     @Bean
     public Queue prisonerGetQueue(){
-        return new Queue("prisoner.get");
+        return new Queue("prisoners.get");
     }
     @Bean
     public Binding prisonerGetBinding(){
-        return BindingBuilder.bind(prisonerGetQueue()).to(prisonerExchange()).with("prisoner.get");
+        return BindingBuilder.bind(prisonerGetQueue()).to(prisonerExchange()).with("prisoners.get");
+    }
+
+    //getting prisoner by id queues
+    @Bean
+    public Queue prisonerGetByIdQueue(){
+        return new Queue("prisoner.getById");
+    }
+    @Bean
+    public Binding prisonerGetByIdBinding(){
+        return BindingBuilder.bind(prisonerGetByIdQueue()).to(prisonerExchange()).with("prisoner.getById");
     }
 }

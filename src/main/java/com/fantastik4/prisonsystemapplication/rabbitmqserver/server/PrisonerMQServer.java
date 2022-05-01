@@ -8,6 +8,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 
 @Component
 public class PrisonerMQServer {
@@ -38,11 +40,18 @@ public class PrisonerMQServer {
         return gson.toJson(prisonerService.removePrisoner(releasedPrisoner));
     }
 
-    @RabbitListener(queues = "prisoner.get")
-    public String getPrisoner(Message message){
+    @RabbitListener(queues = "prisoner.getById")
+    public String getPrisonerById(Message message){
         Long prisonerId = gson.fromJson(new String(message.getBody()), Long.class);
-        Prisoner p = prisonerService.getPrisoner(prisonerId);
+        Prisoner p = prisonerService.getPrisonerById(prisonerId);
         if (p!=null) return gson.toJson(p);
         return "failed to fetch prisoner-" +prisonerId;
+    }
+
+    @RabbitListener(queues = "prisoners.get")
+    public String getPrisoners(Message message){
+        ArrayList<Prisoner> prisoners = prisonerService.getPrisoners();
+        if (prisoners!=null) return gson.toJson(prisoners);
+        return "failed to fetch prisoners";
     }
 }

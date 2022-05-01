@@ -1,6 +1,7 @@
 package com.fantastik4.prisonsystemapplication.services;
 
 import com.fantastik4.prisonsystemapplication.model.Prisoner;
+import com.fantastik4.prisonsystemapplication.model.PrisonersList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -8,13 +9,21 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 @Service
 public class PrisonerServiceImpl implements PrisonerService{
+
     private final RestTemplate restTemplate;
+
     @Autowired
     public PrisonerServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
+
+
+
 
     @Override
     public String addPrisoner(String jsonPrisoner) {
@@ -38,9 +47,21 @@ public class PrisonerServiceImpl implements PrisonerService{
     }
 
     @Override
-    public Prisoner getPrisoner(Long prisonerId) {
+    public Prisoner getPrisonerById(Long prisonerId) {
         try {
             return restTemplate.getForObject("https://localhost:7150/Prisoner/{prisonerId}", Prisoner.class, prisonerId);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList<Prisoner> getPrisoners() {
+        try {
+            PrisonersList prisonersList = restTemplate.getForObject("https://localhost:7150/Prisoner", PrisonersList.class);
+            return prisonersList.getPrisoners();
         }
         catch (Exception e){
             e.printStackTrace();
