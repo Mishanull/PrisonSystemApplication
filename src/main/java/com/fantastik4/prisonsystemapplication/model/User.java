@@ -1,4 +1,4 @@
-package com.fantastik4.applicationtier.model;
+package com.fantastik4.prisonsystemapplication.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;

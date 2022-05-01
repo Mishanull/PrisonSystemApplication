@@ -1,14 +1,12 @@
-package com.fantastik4.applicationtier.rabbitmqserver.server;
+package com.fantastik4.prisonsystemapplication.rabbitmqserver.server;
 
-import com.fantastik4.applicationtier.model.Guard;
-import com.fantastik4.applicationtier.services.GuardService;
+
+import com.fantastik4.prisonsystemapplication.model.Guard;
+import com.fantastik4.prisonsystemapplication.services.GuardService;
 import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
 
 @Component
 public class GuardMQServer {

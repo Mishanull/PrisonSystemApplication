@@ -1,12 +1,11 @@
-package com.fantastik4.applicationtier.rabbitmqserver.server;
+package com.fantastik4.prisonsystemapplication.rabbitmqserver.server;
 
-import com.fantastik4.applicationtier.model.User;
-import com.fantastik4.applicationtier.services.UserService;
+import com.fantastik4.prisonsystemapplication.model.User;
+import com.fantastik4.prisonsystemapplication.services.UserService;
 import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 @Component

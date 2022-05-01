@@ -1,6 +1,6 @@
-package com.fantastik4.applicationtier.services;
+package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.applicationtier.model.Guard;
+import com.fantastik4.prisonsystemapplication.model.Guard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

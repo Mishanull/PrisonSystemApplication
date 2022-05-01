@@ -1,6 +1,6 @@
-package com.fantastik4.applicationtier.services;
+package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.applicationtier.model.User;
+import com.fantastik4.prisonsystemapplication.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
