@@ -1,9 +1,13 @@
 package com.fantastik4.prisonsystemapplication.services;
 
 import com.fantastik4.prisonsystemapplication.model.Guard;
+import com.fantastik4.prisonsystemapplication.model.GuardsList;
+import com.fantastik4.prisonsystemapplication.model.PrisonersList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class GuardServiceImpl implements GuardService{
@@ -52,9 +56,22 @@ public class GuardServiceImpl implements GuardService{
     }
 
     @Override
-    public Guard getGuard(Long guardId) {
+    public Guard getGuardById(Long guardId) {
         try {
             return restTemplate.getForObject("https://localhost:7150/Guard", Guard.class, guardId);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override public List<Guard> getGuards() {
+        try {
+            GuardsList guardsList = restTemplate.getForObject("https://localhost:7150/Guards", GuardsList.class);
+
+            if (guardsList == null) return null;
+            else return guardsList.getGuards();
         }
         catch (Exception e){
             e.printStackTrace();
