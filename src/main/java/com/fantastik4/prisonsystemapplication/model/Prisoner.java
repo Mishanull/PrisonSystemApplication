@@ -8,94 +8,94 @@ import org.springframework.stereotype.Component;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = Prisoner.class)
 public class Prisoner {
 
-    public long Id;
-    public String  Firstname;
-    public String  Lastname;
-    public int Ssn;
-    public String CrimeCommitted;
-    public int Points;
-    public String Note;
+    public long id;
+    public String  firstName;
+    public String  lastName;
+    public int ssn;
+    public String crimeCommitted;
+    public int points;
+    public String note;
 
 
     public Prisoner() {
     }
 
-    public Prisoner(long id, String firstname, String lastname, int ssn, String crimeCommitted, int points, String note) {
-        Id = id;
-        Firstname = firstname;
-        Lastname = lastname;
-        Ssn = ssn;
-        CrimeCommitted = crimeCommitted;
-        Points = points;
-        Note = note;
+    public Prisoner(long id, String firstName, String lastName, int ssn, String crimeCommitted, int points, String note) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.ssn = ssn;
+        this.crimeCommitted = crimeCommitted;
+        this.points = points;
+        this.note = note;
     }
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
-    public String getFirstname() {
-        return Firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        Firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return Lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        Lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getSsn() {
-        return Ssn;
+        return ssn;
     }
 
     public void setSsn(int ssn) {
-        Ssn = ssn;
+        this.ssn = ssn;
     }
 
     public String getCrimeCommitted() {
-        return CrimeCommitted;
+        return crimeCommitted;
     }
 
     public void setCrimeCommitted(String crimeCommitted) {
-        CrimeCommitted = crimeCommitted;
+        this.crimeCommitted = crimeCommitted;
     }
 
     public int getPoints() {
-        return Points;
+        return points;
     }
 
     public void setPoints(int points) {
-        Points = points;
+        this.points = points;
     }
 
     public String getNote() {
-        return Note;
+        return note;
     }
 
     public void setNote(String note) {
-        Note = note;
+        this.note = note;
     }
 
     @Override
     public String toString() {
         return "Prisoner{" +
-                "Id=" + Id +
-                ", Firstname='" + Firstname + '\'' +
-                ", Lastname='" + Lastname + '\'' +
-                ", Ssn=" + Ssn +
-                ", CrimeCommitted='" + CrimeCommitted + '\'' +
-                ", Points=" + Points +
-                ", Note='" + Note + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", ssn=" + ssn +
+                ", crimeCommitted='" + crimeCommitted + '\'' +
+                ", points=" + points +
+                ", note='" + note + '\'' +
                 '}';
     }
 }
