@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -50,7 +51,7 @@ public class PrisonerMQServer {
 
     @RabbitListener(queues = "prisoners.get")
     public String getPrisoners(Message message){
-        ArrayList<Prisoner> prisoners = prisonerService.getPrisoners();
+        List<Prisoner> prisoners = prisonerService.getPrisoners();
         if (prisoners!=null) return gson.toJson(prisoners);
         return "failed to fetch prisoners";
     }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -58,10 +59,12 @@ public class PrisonerServiceImpl implements PrisonerService{
     }
 
     @Override
-    public ArrayList<Prisoner> getPrisoners() {
+    public List<Prisoner> getPrisoners() {
         try {
             PrisonersList prisonersList = restTemplate.getForObject("https://localhost:7150/Prisoner", PrisonersList.class);
-            return prisonersList.getPrisoners();
+
+            if (prisonersList == null) return null;
+            else return prisonersList.getPrisoners();
         }
         catch (Exception e){
             e.printStackTrace();

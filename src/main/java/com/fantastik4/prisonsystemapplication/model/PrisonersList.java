@@ -1,13 +1,14 @@
 package com.fantastik4.prisonsystemapplication.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //inner list-wrapping class
 public class PrisonersList{
 
-    private ArrayList<Prisoner> prisoners;
+    private List<Prisoner> prisoners;
 
-    public PrisonersList(ArrayList<Prisoner> prisoners) {
+    public PrisonersList(List<Prisoner> prisoners) {
         this.prisoners = prisoners;
     }
 
@@ -15,10 +16,10 @@ public class PrisonersList{
         prisoners = new ArrayList<>();
     }
 
-    public ArrayList<Prisoner> getPrisoners() {
+    public List<Prisoner> getPrisoners() {
         return prisoners;
     }
-    public void setPrisoners(ArrayList<Prisoner> prisoners) {
+    public void setPrisoners(List<Prisoner> prisoners) {
         this.prisoners = prisoners;
     }
 }
