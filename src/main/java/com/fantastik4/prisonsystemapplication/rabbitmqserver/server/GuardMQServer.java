@@ -22,12 +22,12 @@ public class GuardMQServer {
     }
 
     @RabbitListener(queues = "guard.add")
-    public String addPGuard(Message message) {
+    public String addGuard(Message message) {
         String jsonGuard = new String(message.getBody());
         System.out.println(jsonGuard);
         Guard newGuard = gson.fromJson(jsonGuard, Guard.class);
         System.out.println(newGuard);
-        return gson.toJson(guardService.addPGuard(newGuard));
+        return gson.toJson(guardService.addGuard(newGuard));
     }
 
     @RabbitListener(queues = "guard.remove")

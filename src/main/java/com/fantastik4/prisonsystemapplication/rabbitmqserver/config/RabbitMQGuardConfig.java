@@ -42,12 +42,12 @@ public class RabbitMQGuardConfig {
     }
 
     @Bean
-    public Queue guardGetByIdQueueQueue(){
+    public Queue guardGetByIdQueue(){
         return new Queue("guard.getById");
     }
     @Bean
     public Binding guardGetByIdBinding(){
-        return BindingBuilder.bind(guardGetByIdQueueQueue()).to(guardExchange()).with("guard.getById");
+        return BindingBuilder.bind(guardGetByIdQueue()).to(guardExchange()).with("guard.getById");
     }
 
 

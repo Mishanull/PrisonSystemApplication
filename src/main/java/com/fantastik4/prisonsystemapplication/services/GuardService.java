@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface GuardService {
-    Guard addPGuard(Guard newGuard);
+    Guard addGuard(Guard newGuard);
     Guard removeGuard(Guard releasedGuard);
     Guard updateGuard(Guard updateGuard);
     Guard getGuardById(Long guardId);

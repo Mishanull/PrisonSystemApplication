@@ -18,7 +18,7 @@ public class GuardServiceImpl implements GuardService{
     }
 
     @Override
-    public Guard addPGuard(Guard newGuard) {
+    public Guard addGuard(Guard newGuard) {
         try {
 
             Guard g=restTemplate.postForObject("https://localhost:7150/Guard", newGuard, Guard.class);
