@@ -56,4 +56,14 @@ public class RabbitMQPrisonerConfig {
     public Binding prisonerGetByIdBinding(){
         return BindingBuilder.bind(prisonerGetByIdQueue()).to(prisonerExchange()).with("prisoner.getById");
     }
+
+    //getting prisoner by id queues
+    @Bean
+    public Queue prisonerUpdateQueue(){
+        return new Queue("prisoner.update");
+    }
+    @Bean
+    public Binding prisonerUpdateBinding(){
+        return BindingBuilder.bind(prisonerGetByIdQueue()).to(prisonerExchange()).with("prisoner.update");
+    }
 }

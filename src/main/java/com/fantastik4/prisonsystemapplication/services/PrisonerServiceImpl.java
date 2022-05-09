@@ -68,4 +68,14 @@ public class PrisonerServiceImpl implements PrisonerService{
             return null;
         }
     }
+
+    @Override
+    public String updatePrisoner(String jsonPrisoner) {
+        //ToDo - unchecked, check if it works !
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> request = new HttpEntity<>(jsonPrisoner, headers);
+
+        return restTemplate.patchForObject("https://localhost:7150/Prisoner", request, String.class);
+    }
 }
