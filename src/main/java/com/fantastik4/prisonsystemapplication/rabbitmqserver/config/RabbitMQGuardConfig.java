@@ -32,14 +32,22 @@ public class RabbitMQGuardConfig {
         return BindingBuilder.bind(guardRemoveQueue()).to(guardExchange()).with("guard.remove");
     }
 
-
     @Bean
-    public Queue guardGetQueue(){
-        return new Queue("guard.get");
+    public Queue guardsGetQueue(){
+        return new Queue("guards.get");
     }
     @Bean
-    public Binding guardGetBinding(){
-        return BindingBuilder.bind(guardGetQueue()).to(guardExchange()).with("guard.get");
+    public Binding guardsGetBinding(){
+        return BindingBuilder.bind(guardsGetQueue()).to(guardExchange()).with("guards.get");
+    }
+
+    @Bean
+    public Queue guardGetByIdQueue(){
+        return new Queue("guard.getById");
+    }
+    @Bean
+    public Binding guardGetByIdBinding(){
+        return BindingBuilder.bind(guardGetByIdQueue()).to(guardExchange()).with("guard.getById");
     }
 
 
