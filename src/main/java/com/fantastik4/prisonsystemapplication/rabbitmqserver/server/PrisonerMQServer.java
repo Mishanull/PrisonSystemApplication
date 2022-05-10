@@ -34,6 +34,17 @@ public class PrisonerMQServer {
         }
     }
 
+    @RabbitListener(queues = "prisoner.update")
+    public String updatePrisoner(Message message){
+        try {
+            String jsonPrisoner = new String(message.getBody());
+            return prisonerService.updatePrisoner(jsonPrisoner);
+        }catch (Exception e){
+            e.printStackTrace();
+            return gson.toJson(null);
+        }
+    }
+
     @RabbitListener(queues = "prisoner.remove")
     public String removePrisoner(Message message){
         String jsonPrisoner = new String(message.getBody());
@@ -43,10 +54,15 @@ public class PrisonerMQServer {
 
     @RabbitListener(queues = "prisoner.getById")
     public String getPrisonerById(Message message){
-        Long prisonerId = gson.fromJson(new String(message.getBody()), Long.class);
-        Prisoner p = prisonerService.getPrisonerById(prisonerId);
-        if (p!=null) return gson.toJson(p);
-        return "failed to fetch prisoner-" +prisonerId;
+        try {
+            Long prisonerId = gson.fromJson(new String(message.getBody()), Long.class);
+            Prisoner p = prisonerService.getPrisonerById(prisonerId);
+            if (p!=null) return gson.toJson(p);
+            return "failed to fetch prisoner-" +prisonerId;
+        }catch (Exception e){
+            e.printStackTrace();
+            return gson.toJson(null);
+        }
     }
 
     @RabbitListener(queues = "prisoners.get")
