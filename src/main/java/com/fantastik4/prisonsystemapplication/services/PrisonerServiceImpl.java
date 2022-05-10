@@ -20,9 +20,6 @@ public class PrisonerServiceImpl implements PrisonerService{
         this.restTemplate = restTemplate;
     }
 
-
-
-
     @Override
     public String addPrisoner(String jsonPrisoner) {
         HttpHeaders headers = new HttpHeaders();
@@ -70,12 +67,13 @@ public class PrisonerServiceImpl implements PrisonerService{
     }
 
     @Override
-    public String updatePrisoner(String jsonPrisoner) {
+    public Prisoner updatePrisoner(String jsonPrisoner) {
         //ToDo - unchecked, check if it works !
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(jsonPrisoner, headers);
-
-        return restTemplate.patchForObject("https://localhost:7150/Prisoner", request, String.class);
+        Prisoner reply=restTemplate.patchForObject("https://localhost:7150/Prisoner", request, Prisoner.class);
+        System.out.println(reply);
+        return restTemplate.patchForObject("https://localhost:7150/Prisoner", request, Prisoner.class);
     }
 }

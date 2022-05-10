@@ -12,5 +12,5 @@ public interface PrisonerService {
     Prisoner removePrisoner(Prisoner releasedPrisoner);
     Prisoner getPrisonerById(Long prisonerId);
     List<Prisoner> getPrisoners();
-    String updatePrisoner(String jsonPrisoner);
+    Prisoner updatePrisoner(String jsonPrisoner);
 }

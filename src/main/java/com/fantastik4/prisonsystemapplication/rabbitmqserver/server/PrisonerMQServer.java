@@ -38,7 +38,7 @@ public class PrisonerMQServer {
     public String updatePrisoner(Message message){
         try {
             String jsonPrisoner = new String(message.getBody());
-            return prisonerService.updatePrisoner(jsonPrisoner);
+            return gson.toJson(prisonerService.updatePrisoner(jsonPrisoner));
         }catch (Exception e){
             e.printStackTrace();
             return gson.toJson(null);
