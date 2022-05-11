@@ -30,7 +30,7 @@ public class PrisonerMQServer {
             return prisonerService.addPrisoner(jsonPrisoner);
         }catch (Exception e){
             e.printStackTrace();
-            return gson.toJson(null);
+            return "fail";
         }
     }
 
@@ -38,30 +38,29 @@ public class PrisonerMQServer {
     public String updatePrisoner(Message message){
         try {
             String jsonPrisoner = new String(message.getBody());
-            return gson.toJson(prisonerService.updatePrisoner(jsonPrisoner));
+            return prisonerService.updatePrisoner(jsonPrisoner);
         }catch (Exception e){
             e.printStackTrace();
-            return gson.toJson(null);
+            return "fail";
         }
     }
 
     @RabbitListener(queues = "prisoner.remove")
     public String removePrisoner(Message message){
-        String jsonPrisoner = new String(message.getBody());
-        Prisoner releasedPrisoner = gson.fromJson(jsonPrisoner, Prisoner.class);
-        return gson.toJson(prisonerService.removePrisoner(releasedPrisoner));
+        Long id = Long.parseLong(new String(message.getBody()));
+        return prisonerService.removePrisoner(id);
     }
 
     @RabbitListener(queues = "prisoner.getById")
     public String getPrisonerById(Message message){
         try {
-            Long prisonerId = gson.fromJson(new String(message.getBody()), Long.class);
+            Long prisonerId = Long.parseLong(new String(message.getBody()));
             Prisoner p = prisonerService.getPrisonerById(prisonerId);
             if (p!=null) return gson.toJson(p);
-            return "failed to fetch prisoner-" +prisonerId;
+            return "fail";
         }catch (Exception e){
             e.printStackTrace();
-            return gson.toJson(null);
+            return "fail";
         }
     }
 
@@ -69,6 +68,6 @@ public class PrisonerMQServer {
     public String getPrisoners(Message message){
         List<Prisoner> prisoners = prisonerService.getPrisoners();
         if (prisoners!=null) return gson.toJson(prisoners);
-        return "failed to fetch prisoners";
+        return "fail";
     }
 }

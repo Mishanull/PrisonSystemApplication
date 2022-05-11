@@ -22,16 +22,16 @@ public class GuardServiceImpl implements GuardService{
     }
 
     @Override
-    public Guard addGuard(Guard newGuard) {
+    public String createGuard(Guard newGuard) {
         try {
             newGuard.setPassword("123456");
-            Guard g=restTemplate.postForObject("https://localhost:7150/Guard", newGuard, Guard.class);
-            System.out.println(g);
-            return g;
+            restTemplate.postForObject("https://localhost:7150/Guard", newGuard, Guard.class);
+
+            return "success";
         }
         catch (Exception e){
             e.printStackTrace();
-            return null;
+            return "fail";
         }
     }
 
@@ -43,23 +43,22 @@ public class GuardServiceImpl implements GuardService{
         }
         catch (Exception e){
             e.printStackTrace();
-            return "false";
+            return "fail";
         }
     }
 
     @Override
     public String updateGuard(String jsonGuard) {
         try {
-            Gson gson=new Gson();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<String> request = new HttpEntity<>(jsonGuard, headers);
             restTemplate.patchForObject("https://localhost:7150/Guard", request, Guard.class);
-            return "updated";
+            return "success";
         }
         catch (Exception e){
             e.printStackTrace();
-            return "failed";
+            return "fail";
         }
     }
 

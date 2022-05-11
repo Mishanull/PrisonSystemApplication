@@ -9,8 +9,8 @@ import java.util.List;
 @Service
 public interface PrisonerService {
     String addPrisoner(String newPrisoner);
-    Prisoner removePrisoner(Prisoner releasedPrisoner);
+    String removePrisoner(Long id);
     Prisoner getPrisonerById(Long prisonerId);
     List<Prisoner> getPrisoners();
-    Prisoner updatePrisoner(String jsonPrisoner);
+    String updatePrisoner(String jsonPrisoner);
 }

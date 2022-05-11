@@ -30,21 +30,22 @@ public class PrisonerServiceImpl implements PrisonerService{
     }
 
     @Override
-    public Prisoner removePrisoner(Prisoner releasedPrisoner) {
+    public String removePrisoner(Long id) {
         try {
-            restTemplate.delete("https://localhost:7150/Prisoner/" + releasedPrisoner.getId());
-            return releasedPrisoner;
+            restTemplate.delete("https://localhost:7150/Prisoner/{id}",id);
+            return "success";
         }
         catch (Exception e){
             e.printStackTrace();
-            return null;
+            return "failed";
         }
     }
 
     @Override
     public Prisoner getPrisonerById(Long prisonerId) {
         try {
-            return restTemplate.getForObject("https://localhost:7150/Prisoner/{prisonerId}", Prisoner.class, prisonerId);
+
+            return restTemplate.getForObject("https://localhost:7150/Prisoner/{id}", Prisoner.class, prisonerId);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -67,11 +68,18 @@ public class PrisonerServiceImpl implements PrisonerService{
     }
 
     @Override
-    public Prisoner updatePrisoner(String jsonPrisoner) {
+    public String updatePrisoner(String jsonPrisoner) {
         //ToDo - unchecked, check if it works !
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(jsonPrisoner, headers);
-        return restTemplate.patchForObject("https://localhost:7150/Prisoner", request, Prisoner.class);
+        try{
+            restTemplate.patchForObject("https://localhost:7150/Prisoner", request, Prisoner.class);
+            return "success";
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
     }
 }
