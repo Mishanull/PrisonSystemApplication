@@ -50,5 +50,12 @@ public class RabbitMQGuardConfig {
         return BindingBuilder.bind(guardGetByIdQueue()).to(guardExchange()).with("guard.getById");
     }
 
-
+    @Bean
+    public Queue guardUpdateQueue(){
+        return new Queue("guard.update");
+    }
+    @Bean
+    public Binding guardUpdateBinding(){
+        return BindingBuilder.bind(guardUpdateQueue()).to(guardExchange()).with("guard.update");
+    }
 }

@@ -72,8 +72,6 @@ public class PrisonerServiceImpl implements PrisonerService{
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(jsonPrisoner, headers);
-        Prisoner reply=restTemplate.patchForObject("https://localhost:7150/Prisoner", request, Prisoner.class);
-        System.out.println(reply);
         return restTemplate.patchForObject("https://localhost:7150/Prisoner", request, Prisoner.class);
     }
 }

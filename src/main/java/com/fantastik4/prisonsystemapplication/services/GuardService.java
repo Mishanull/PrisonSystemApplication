@@ -9,8 +9,8 @@ import java.util.List;
 @Service
 public interface GuardService {
     Guard addGuard(Guard newGuard);
-    Guard removeGuard(Guard releasedGuard);
-    Guard updateGuard(Guard updateGuard);
+    String removeGuard(Long id);
+    String updateGuard(String jsonGuard);
     Guard getGuardById(Long guardId);
     List<Guard> getGuards();
 }

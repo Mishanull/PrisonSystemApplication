@@ -32,23 +32,28 @@ public class GuardMQServer {
 
     @RabbitListener(queues = "guard.remove")
     public String removeGuard(Message message) {
-        String jsonGuard = new String(message.getBody());
-        Guard releaseGuard = gson.fromJson(jsonGuard, Guard.class);
-        return gson.toJson(guardService.removeGuard(releaseGuard));
+        Long id = Long.parseLong(new String(message.getBody()));
+        return gson.toJson(guardService.removeGuard(id));
     }
 
     @RabbitListener(queues = "guard.getById")
     public String getGuardById(Message message) {
-        Long guardId = gson.fromJson(new String(message.getBody()), Long.class);
+        Long guardId=Long.parseLong(new String(message.getBody()));
         Guard guard = guardService.getGuardById(guardId);
         if (guard!=null) return gson.toJson(guard);
-        return "failed to fetch guard-" +guardId;
+        return "failed " ;
     }
 
     @RabbitListener(queues = "guards.get")
     public String getGuards(Message message){
+        System.out.println(new String(message.getBody()));
         List<Guard> guards = guardService.getGuards();
         if (guards!=null) return gson.toJson(guards);
         return "failed to fetch guards";
+    }
+    @RabbitListener(queues = "guard.update")
+    public String updateGuard(Message message){
+        System.out.println(new String(message.getBody()));
+        return guardService.updateGuard(new String(message.getBody()));
     }
 }
