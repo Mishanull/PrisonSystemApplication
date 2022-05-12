@@ -24,7 +24,7 @@ public class GuardServiceImpl implements GuardService{
     @Override
     public String createGuard(Guard newGuard) {
         try {
-            newGuard.setPassword("123456");
+//            newGuard.setPassword("123456");
             restTemplate.postForObject("https://localhost:7150/Guard", newGuard, Guard.class);
 
             return "success";
