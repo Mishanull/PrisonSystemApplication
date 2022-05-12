@@ -28,6 +28,7 @@ public class GuardServiceImpl implements GuardService{
     public String createGuard(Guard newGuard) {
         try {
 //            newGuard.setPassword("123456");
+
             Guard g = restTemplate.postForObject("https://localhost:7150/Guard", newGuard, Guard.class);
             return gson.toJson(g);
 //            return "success";
