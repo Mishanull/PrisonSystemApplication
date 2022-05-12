@@ -24,7 +24,7 @@ public class GuardMQServer {
     public String createGuard(Message message) {
         String jsonGuard = new String(message.getBody());
         Guard newGuard = gson.fromJson(jsonGuard, Guard.class);
-        return gson.toJson(guardService.createGuard(newGuard));
+        return guardService.createGuard(newGuard);
     }
 
     @RabbitListener(queues = "guard.remove")
@@ -36,17 +36,14 @@ public class GuardMQServer {
     @RabbitListener(queues = "guard.getById")
     public String getGuardById(Message message) {
         Long guardId=Long.parseLong(new String(message.getBody()));
-        Guard guard = guardService.getGuardById(guardId);
-        if (guard!=null) return gson.toJson(guard);
-        return "fail" ;
+        return guardService.getGuardById(guardId);
     }
 
     @RabbitListener(queues = "guards.get")
     public String getGuards(Message message){
-        List<Guard> guards = guardService.getGuards();
-        if (guards!=null) return gson.toJson(guards);
-        return "fail";
+        return guardService.getGuards();
     }
+
     @RabbitListener(queues = "guard.update")
     public String updateGuard(Message message){
         return guardService.updateGuard(new String(message.getBody()));
