@@ -16,18 +16,21 @@ import java.util.List;
 @Service
 public class GuardServiceImpl implements GuardService{
     private RestTemplate restTemplate;
+    private Gson gson;
+
     @Autowired
     public GuardServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
+        gson = new Gson();
     }
 
     @Override
     public String createGuard(Guard newGuard) {
         try {
             newGuard.setPassword("123456");
-            restTemplate.postForObject("https://localhost:7150/Guard", newGuard, Guard.class);
-
-            return "success";
+            Guard g = restTemplate.postForObject("https://localhost:7150/Guard", newGuard, Guard.class);
+            return gson.toJson(g);
+//            return "success";
         }
         catch (Exception e){
             e.printStackTrace();
@@ -63,26 +66,24 @@ public class GuardServiceImpl implements GuardService{
     }
 
     @Override
-    public Guard getGuardById(Long guardId) {
+    public String getGuardById(Long guardId) {
         try {
-            return restTemplate.getForObject("https://localhost:7150/Guard/{id}", Guard.class, guardId);
+            return restTemplate.getForObject("https://localhost:7150/Guard/{id}", String.class, guardId);
         }
         catch (Exception e){
             e.printStackTrace();
-            return null;
+            return "fail";
         }
     }
 
-    @Override public List<Guard> getGuards() {
+    @Override public String getGuards() {
         try {
             GuardsList guardsList = restTemplate.getForObject("https://localhost:7150/Guard", GuardsList.class);
-
-            if (guardsList == null) return null;
-            else return guardsList.getGuards();
+            return gson.toJson(guardsList.getGuards());
         }
         catch (Exception e){
             e.printStackTrace();
-            return null;
+            return "fail";
         }
     }
 }
