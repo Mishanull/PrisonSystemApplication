@@ -25,7 +25,7 @@ public class UserMQServer {
         try {
             System.out.println(message);
             User user = userService.getUser(new String(message.getBody()));
-            System.out.println(user);
+            System.out.println(user.getRole());
             if(user!=null) return gson.toJson(user);
             else throw new Exception("User not retrieved yet");
         }

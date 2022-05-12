@@ -13,7 +13,7 @@ public class User implements Serializable  {
     private String password;
     private String firstName;
     private String lastName;
-
+    private String role;
     public User() {
     }
 
@@ -55,6 +55,14 @@ public class User implements Serializable  {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
