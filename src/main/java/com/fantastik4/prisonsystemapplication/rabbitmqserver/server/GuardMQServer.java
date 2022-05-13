@@ -2,21 +2,24 @@ package com.fantastik4.prisonsystemapplication.rabbitmqserver.server;
 
 
 import com.fantastik4.prisonsystemapplication.model.Guard;
+import com.fantastik4.prisonsystemapplication.services.EmailService;
 import com.fantastik4.prisonsystemapplication.services.GuardService;
 import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class GuardMQServer {
     private GuardService guardService;
+    private EmailService emailService;
     private Gson gson;
 
-    public GuardMQServer(GuardService guardService) {
+    @Autowired
+    public GuardMQServer(GuardService guardService, EmailService emailService) {
         this.guardService = guardService;
+        this.emailService = emailService;
         gson = new Gson();
     }
 
@@ -24,7 +27,12 @@ public class GuardMQServer {
     public String createGuard(Message message) {
         String jsonGuard = new String(message.getBody());
         Guard newGuard = gson.fromJson(jsonGuard, Guard.class);
-        return guardService.createGuard(newGuard);
+
+        String response = guardService.createGuard(newGuard);
+        if (!response.equals("fail")){
+            emailService.sendSimpleMessage(newGuard.getEmail(), "Log-in credentials", "Your new log in credentials are:\n -username:"+newGuard.getUsername()+"\n -password:"+newGuard.getPassword());
+        }
+        return response;
     }
 
     @RabbitListener(queues = "guard.remove")
