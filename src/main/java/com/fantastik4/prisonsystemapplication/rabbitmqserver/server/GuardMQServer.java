@@ -8,8 +8,6 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class GuardMQServer {
     private GuardService guardService;
