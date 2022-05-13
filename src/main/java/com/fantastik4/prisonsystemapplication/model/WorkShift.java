@@ -5,19 +5,9 @@ import java.util.List;
 
 public class WorkShift {
     private Long id;
-    private Sector Sector;
-    private Time Start;
-    private Time End;
-    private List<String>  Days;
+    private String Start;
+    private String End;
     private List<Guard> guards;
-
-    public WorkShift(Long id, Sector sector, Time start, Time end, List<String> days) {
-        this.id = id;
-        Sector = sector;
-        Start = start;
-        End = end;
-        Days = days;
-    }
 
     public Long getId() {
         return id;
@@ -27,36 +17,20 @@ public class WorkShift {
         this.id = id;
     }
 
-    public Sector getSector() {
-        return Sector;
-    }
-
-    public void setSector(Sector sector) {
-        Sector = sector;
-    }
-
-    public Time getStart() {
+    public String getStart() {
         return Start;
     }
 
-    public void setStart(Time start) {
+    public void setStart(String start) {
         Start = start;
     }
 
-    public Time getEnd() {
+    public String getEnd() {
         return End;
     }
 
-    public void setEnd(Time end) {
+    public void setEnd(String end) {
         End = end;
-    }
-
-    public List<String> getDays() {
-        return Days;
-    }
-
-    public void setDays(List<String> days) {
-        Days = days;
     }
 
     public List<Guard> getGuards() {
@@ -71,21 +45,9 @@ public class WorkShift {
     public String toString() {
         return "WorkShift{" +
                 "id=" + id +
-                ", Sector='" + Sector + '\'' +
-                ", Start=" + Start +
-                ", End=" + End +
-                ", Days=" + Days +
+                ", Start='" + Start + '\'' +
+                ", End='" + End + '\'' +
                 ", guards=" + guards +
                 '}';
-    }
-
-    public enum Sector{
-        SectorA,
-        SectorB,
-        SectorC,
-        SectorD,
-        SectorE,
-        SectorF,
-        SectorG
     }
 }

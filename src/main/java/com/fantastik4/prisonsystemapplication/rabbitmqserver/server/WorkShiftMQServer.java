@@ -44,8 +44,8 @@ public class WorkShiftMQServer {
     @RabbitListener(queues = "workShift.update")
     String updatePrisoner(Message message){
         try {
-            String jsonPrisoner = new String(message.getBody());
-            return workShiftService.updateWorkShift(jsonPrisoner);
+            String jsonShifts = new String(message.getBody());
+            return workShiftService.updateWorkShift(jsonShifts);
         }catch (Exception e){
             e.printStackTrace();
             return "fail";
@@ -63,7 +63,9 @@ public class WorkShiftMQServer {
     }
 
     @RabbitListener(queues = "workShift.removeGuard")
-    String removeGuardFromWorkShiftAsync(Message message){
+    String removeGuardFromWorkShiftAsync(Message message) {
         return null;
-    }
+        }
+
 }
+

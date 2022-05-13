@@ -24,13 +24,13 @@ public class WorkShiftServiceImpl implements WorkShiftService{
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<String> request = new HttpEntity<>(jsonShift, headers);
 
-            return restTemplate.postForObject("https://localhost:7150/Prisoner", request, String.class);
+            return restTemplate.postForObject("https://localhost:7150/WorkShift", request, String.class);
     }
 
     @Override
     public String removeWorkShift(Long id) {
         try {
-            restTemplate.delete("https://localhost:7150/Prisoner/{id}",id);
+            restTemplate.delete("https://localhost:7150/WorkShift/{id}",id);
             return "success";
         }
         catch (Exception e){
@@ -42,7 +42,7 @@ public class WorkShiftServiceImpl implements WorkShiftService{
     @Override
     public List<WorkShift> getWorkShifts() {
         try {
-            WorkShiftList workShiftList = restTemplate.getForObject("https://localhost:7150/Prisoner", WorkShiftList.class);
+            WorkShiftList workShiftList = restTemplate.getForObject("https://localhost:7150/WorkShift", WorkShiftList.class);
 
             if (workShiftList == null) return null;
             else return workShiftList.getWorkShifts();
@@ -59,7 +59,7 @@ public class WorkShiftServiceImpl implements WorkShiftService{
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<String> request = new HttpEntity<>(jsonWorkShift, headers);
-            restTemplate.patchForObject("https://localhost:7150/Guard", request, WorkShift.class);
+            restTemplate.patchForObject("https://localhost:7150/WorkShift", request, WorkShift.class);
             return "success";
         }
         catch (Exception e){
@@ -69,17 +69,49 @@ public class WorkShiftServiceImpl implements WorkShiftService{
     }
 
     @Override
-    public String addGuardToWorkShift(Long guardId, Long shiftId) {
-        return null;
+    public String addGuardToWorkShift(String guardId, String shiftId) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<String> request = new HttpEntity<>(guardId, headers);
+            HttpEntity<String> request2 = new HttpEntity<>(shiftId, headers);
+            restTemplate.patchForObject("https://localhost:7150/WorkShift/addGuard/{guardId:int}/{shiftId:int}", request, Guard.class, request2, WorkShift.class);
+            return "success";
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
     }
 
     @Override
-    public String setGuardsInWorkShift(List<Guard> jsonWorkShift) {
-        return null;
+    public String setGuardsInWorkShift(List<String> jsonWorkShifts) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<List<String>> request = new HttpEntity<>(jsonWorkShifts, headers); //??
+            restTemplate.patchForObject("https://localhost:7150/WorkShift/setGuards/{guardId:int}", request, Guard.class); //??
+            return "success";
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
     }
 
     @Override
-    public String removeGuardFromWorkShift(Long guardId, Long shiftId) {
-        return null;
+    public String removeGuardFromWorkShift(String guardId, String shiftId) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<String> request = new HttpEntity<>(guardId, headers);
+            HttpEntity<String> request2 = new HttpEntity<>(shiftId, headers);
+            restTemplate.patchForObject("https://localhost:7150/WorkShift/removeGuard/{guardId:int}/{shiftId:int}", request, Guard.class, request2, WorkShift.class);
+            return "success";
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
     }
 }
