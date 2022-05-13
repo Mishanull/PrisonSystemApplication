@@ -10,6 +10,6 @@ public interface GuardService {
     String createGuard(Guard newGuard);
     String removeGuard(Long id);
     String updateGuard(String jsonGuard);
-    Guard getGuardById(Long guardId);
-    List<Guard> getGuards();
+    String getGuardById(Long guardId);
+    String getGuards();
 }
