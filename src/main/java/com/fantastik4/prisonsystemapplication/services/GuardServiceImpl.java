@@ -3,6 +3,7 @@ package com.fantastik4.prisonsystemapplication.services;
 import com.fantastik4.prisonsystemapplication.model.Guard;
 import com.fantastik4.prisonsystemapplication.model.GuardsList;
 import com.fantastik4.prisonsystemapplication.model.PrisonersList;
+import com.fantastik4.prisonsystemapplication.utils.UsernameGenerator;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -28,7 +29,7 @@ public class GuardServiceImpl implements GuardService{
     public String createGuard(Guard newGuard) {
         try {
 //            newGuard.setPassword("123456");
-
+            newGuard.setUsername(UsernameGenerator.generate(newGuard.getFirstName(),newGuard.getLastName()));
             Guard g = restTemplate.postForObject("https://localhost:7150/Guard", newGuard, Guard.class);
             return gson.toJson(g);
 //            return "success";
