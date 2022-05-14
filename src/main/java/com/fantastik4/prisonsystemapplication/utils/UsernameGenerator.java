@@ -9,8 +9,8 @@ public class UsernameGenerator {
         Random random=new Random();
         //third party library that generates fake data
         Faker faker=new Faker();
-        //if first name or last name have less than 2 characters, generate random names
-        if(firstName.length()<2 || lastName.length()<2){
+        //if first name or last name have less than 2 characters,  generate random names
+        if(firstName.length()<3 || lastName.length()<3){
              firstName= faker.name().firstName();
              lastName=faker.name().lastName();
         }
