@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 public class WorkShiftMQServer {
@@ -53,19 +54,36 @@ public class WorkShiftMQServer {
     }
 
     @RabbitListener(queues = "workShift.addGuard")
-    String addGuardToWorkShiftAsync(Message message){
-        return null;
+    String addGuardToWorkShiftAsync(Message message) {
+        try {
+            String[] strArray = new String[]{new String(message.getBody())};
+            String guardId = strArray[0];
+            String shiftId = strArray[0];
+            return workShiftService.addGuardToWorkShift(guardId, shiftId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
     }
 
     @RabbitListener(queues = "workShift.setGuards")
     String setGuardsInWorkShiftAsync(Message message){
+        //TODO:
         return null;
     }
 
     @RabbitListener(queues = "workShift.removeGuard")
     String removeGuardFromWorkShiftAsync(Message message) {
-        return null;
+        try {
+            String[] strArray = new String[]{new String(message.getBody())};
+            String guardId = strArray[0];
+            String shiftId = strArray[0];
+            return workShiftService.removeGuardFromWorkShift(guardId, shiftId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
         }
+    }
 
 }
 
