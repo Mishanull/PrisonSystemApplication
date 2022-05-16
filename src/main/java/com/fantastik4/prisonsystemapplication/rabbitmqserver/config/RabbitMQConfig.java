@@ -1,5 +1,6 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqserver.config;
 
+import com.rabbitmq.client.AMQP;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -25,6 +26,21 @@ public class RabbitMQConfig {
     public Binding binding() {
         return BindingBuilder.bind(msgQueue()).to(exchange()).with(QUEUE);
     }
+    @Bean
+    public Queue loginConfirmationQueue(){
+        return new Queue("login.confirm");
+    }
+    @Bean
+    public Binding loginBinding(){
+        return BindingBuilder.bind(loginConfirmationQueue()).to(exchange()).with("login.confirm");
+    }
 
-
+    @Bean
+    public Queue logOutQueue(){
+        return new Queue("logout.confirm");
+    }
+    @Bean
+    public Binding logOutBinding(){
+        return BindingBuilder.bind(logOutQueue()).to(exchange()).with("logout.confirm");
+    }
 }
