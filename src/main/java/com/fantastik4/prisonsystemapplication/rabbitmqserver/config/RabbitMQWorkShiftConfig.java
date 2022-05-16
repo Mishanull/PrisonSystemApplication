@@ -17,7 +17,6 @@ public class RabbitMQWorkShiftConfig {
 
     @Bean
     public Queue createWorkShiftQueue(){return new Queue("workShift.add");}
-
     @Bean
     public Binding createWorkShiftBinding(){
         return BindingBuilder.bind(createWorkShiftQueue()).to(workShiftExchange()).with("workShift.add");

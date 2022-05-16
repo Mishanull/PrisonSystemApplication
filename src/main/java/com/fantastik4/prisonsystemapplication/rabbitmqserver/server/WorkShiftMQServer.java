@@ -25,6 +25,7 @@ public class WorkShiftMQServer {
     public String CreateWorkShiftAsync(Message message){
         try {
             String jsonShift = new String(message.getBody());
+            System.out.println("work shift add queue");
             return workShiftService.createWorkShift(jsonShift);
         }catch (Exception e){
             e.printStackTrace();
