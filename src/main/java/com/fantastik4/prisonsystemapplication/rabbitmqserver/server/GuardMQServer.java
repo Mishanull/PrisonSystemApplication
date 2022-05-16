@@ -4,6 +4,8 @@ package com.fantastik4.prisonsystemapplication.rabbitmqserver.server;
 import com.fantastik4.prisonsystemapplication.model.Guard;
 import com.fantastik4.prisonsystemapplication.services.EmailService;
 import com.fantastik4.prisonsystemapplication.services.GuardService;
+import com.fantastik4.prisonsystemapplication.utils.PasswordGenerator;
+import com.fantastik4.prisonsystemapplication.utils.PasswordHasher;
 import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -28,9 +30,17 @@ public class GuardMQServer {
         String jsonGuard = new String(message.getBody());
         Guard newGuard = gson.fromJson(jsonGuard, Guard.class);
 
+        String newPassword = PasswordGenerator.generate(8);
+        System.out.println("Generated password: " + newPassword);
+        String hashedPassword = PasswordHasher.hash(newPassword);
+        System.out.println("Hashed password: " + hashedPassword);
+        newGuard.setPassword(hashedPassword);
+
         String response = guardService.createGuard(newGuard);
         if (!response.equals("fail")){
-            emailService.sendSimpleMessage(newGuard.getEmail(), "Log-in credentials", "Your new log in credentials are:\n -username:"+newGuard.getUsername()+"\n -password:"+newGuard.getPassword());
+            emailService.sendSimpleMessage(newGuard.getEmail(),
+                "Log-in credentials", "Your new log in credentials are:\n -username:"+newGuard.getUsername()+
+                    "\n -password:"+newPassword);
         }
         return response;
     }
