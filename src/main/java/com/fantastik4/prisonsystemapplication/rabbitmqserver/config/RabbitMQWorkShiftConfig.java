@@ -5,7 +5,9 @@ import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class RabbitMQWorkShiftConfig {
 
     @Bean
@@ -15,7 +17,6 @@ public class RabbitMQWorkShiftConfig {
 
     @Bean
     public Queue createWorkShiftQueue(){return new Queue("workShift.add");}
-
     @Bean
     public Binding createWorkShiftBinding(){
         return BindingBuilder.bind(createWorkShiftQueue()).to(workShiftExchange()).with("workShift.add");
