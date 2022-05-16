@@ -1,5 +1,4 @@
 package com.fantastik4.prisonsystemapplication.model;
-import org.apache.tomcat.jni.Time;
 
 import java.util.List;
 
@@ -8,7 +7,7 @@ public class WorkShift {
     private String start;
     private String end;
     private Sector sector;
-    private String daysOfWeeks;
+    private String days;
     private List<Guard> guards;
 
     public Long getId() {
@@ -43,12 +42,12 @@ public class WorkShift {
         this.sector = sector;
     }
 
-    public String getDaysOfWeeks() {
-        return daysOfWeeks;
+    public String getDays() {
+        return days;
     }
 
-    public void setDaysOfWeeks(String daysOfWeeks) {
-        this.daysOfWeeks = daysOfWeeks;
+    public void setDays(String days) {
+        this.days = days;
     }
 
     public List<Guard> getGuards() {
@@ -66,7 +65,7 @@ public class WorkShift {
                 ", start='" + start + '\'' +
                 ", end='" + end + '\'' +
                 ", sector=" + sector +
-                ", daysOfWeeks=" + daysOfWeeks +
+                ", days=" + days +
                 ", guards=" + guards +
                 '}';
     }
