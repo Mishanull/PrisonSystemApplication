@@ -8,7 +8,7 @@ public class WorkShift {
     private String start;
     private String end;
     private Sector sector;
-    private List<DaysOfWeek> daysOfWeeks;
+    private String daysOfWeeks;
     private List<Guard> guards;
 
     public Long getId() {
@@ -43,11 +43,11 @@ public class WorkShift {
         this.sector = sector;
     }
 
-    public List<DaysOfWeek> getDaysOfWeeks() {
+    public String getDaysOfWeeks() {
         return daysOfWeeks;
     }
 
-    public void setDaysOfWeeks(List<DaysOfWeek> daysOfWeeks) {
+    public void setDaysOfWeeks(String daysOfWeeks) {
         this.daysOfWeeks = daysOfWeeks;
     }
 

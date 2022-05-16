@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+@Service
 public class WorkShiftServiceImpl implements WorkShiftService{
 
     private final RestTemplate restTemplate;
@@ -76,21 +78,6 @@ public class WorkShiftServiceImpl implements WorkShiftService{
             HttpEntity<String> request = new HttpEntity<>(guardId, headers);
             HttpEntity<String> request2 = new HttpEntity<>(shiftId, headers);
             restTemplate.patchForObject("https://localhost:7150/WorkShift/addGuard/{guardId:int}/{shiftId:int}", request, Guard.class, request2, WorkShift.class);
-            return "success";
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return "fail";
-        }
-    }
-
-    @Override
-    public String setGuardsInWorkShift(List<String> jsonWorkShifts) {
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<List<String>> request = new HttpEntity<>(jsonWorkShifts, headers); //??
-            restTemplate.patchForObject("https://localhost:7150/WorkShift/setGuards/{guardId:int}", request, Guard.class); //??
             return "success";
         }
         catch (Exception e){

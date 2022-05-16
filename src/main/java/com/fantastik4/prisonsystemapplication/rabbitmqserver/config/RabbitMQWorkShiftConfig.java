@@ -5,7 +5,9 @@ import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class RabbitMQWorkShiftConfig {
 
     @Bean
@@ -47,13 +49,6 @@ public class RabbitMQWorkShiftConfig {
     @Bean
     public Binding addGuardToWorkShiftBinding(){
         return BindingBuilder.bind(addGuardToWorkShiftQueue()).to(workShiftExchange()).with("workShift.addGuard");
-    }
-
-    @Bean
-    public Queue setGuardsInWorkShiftQueue(){return new Queue("workShift.setGuards");}
-    @Bean
-    public Binding setGuardsInWorkShiftBinding(){
-        return BindingBuilder.bind(setGuardsInWorkShiftQueue()).to(workShiftExchange()).with("workShift.setGuards");
     }
 
     @Bean

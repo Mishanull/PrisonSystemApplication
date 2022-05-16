@@ -5,14 +5,17 @@ import com.fantastik4.prisonsystemapplication.services.WorkShiftService;
 import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
+@Component
 public class WorkShiftMQServer {
-    private WorkShiftService workShiftService;
+    private final WorkShiftService workShiftService;
     private Gson gson;
 
+    @Autowired
     public WorkShiftMQServer(WorkShiftService workShiftService) {
         this.workShiftService = workShiftService;
         gson = new Gson();
@@ -64,12 +67,6 @@ public class WorkShiftMQServer {
             e.printStackTrace();
             return "fail";
         }
-    }
-
-    @RabbitListener(queues = "workShift.setGuards")
-    String setGuardsInWorkShiftAsync(Message message){
-        //TODO:
-        return null;
     }
 
     @RabbitListener(queues = "workShift.removeGuard")
