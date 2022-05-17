@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 public class WorkShiftMQServer {
@@ -43,7 +42,7 @@ public class WorkShiftMQServer {
     }
 
     @RabbitListener(queues = "workShift.update")
-    String updatePrisoner(Message message){
+    String updateWorkShift(Message message){
         try {
             String jsonShifts = new String(message.getBody());
             return workShiftService.updateWorkShift(jsonShifts);
@@ -58,7 +57,7 @@ public class WorkShiftMQServer {
         try {
             String[] strArray = new String[]{new String(message.getBody())};
             String guardId = strArray[0];
-            String shiftId = strArray[0];
+            String shiftId = strArray[1];
             return workShiftService.addGuardToWorkShift(guardId, shiftId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +76,7 @@ public class WorkShiftMQServer {
         try {
             String[] strArray = new String[]{new String(message.getBody())};
             String guardId = strArray[0];
-            String shiftId = strArray[0];
+            String shiftId = strArray[1];
             return workShiftService.removeGuardFromWorkShift(guardId, shiftId);
         } catch (Exception e) {
             e.printStackTrace();
