@@ -37,9 +37,12 @@ public class GuardMQServer {
 
         String response = guardService.createGuard(newGuard);
         if (!response.equals("fail")){
-            emailService.sendSimpleMessage(newGuard.getEmail(),
-                "Log-in credentials", "Your new log in credentials are:\n -username:"+newGuard.getUsername()+
-                    "\n -password:"+newPassword);
+            new Thread(()->{
+                emailService.sendSimpleMessage(newGuard.getEmail(),
+                        "Log-in credentials", "Your new log in credentials are:" +
+                                "\n - username: "+newGuard.getUsername()+
+                                "\n - password: "+newPassword);
+            }).start();
         }
         return response;
     }
