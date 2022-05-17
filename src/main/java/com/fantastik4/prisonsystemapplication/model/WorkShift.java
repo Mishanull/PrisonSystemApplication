@@ -1,12 +1,13 @@
 package com.fantastik4.prisonsystemapplication.model;
-import org.apache.tomcat.jni.Time;
 
 import java.util.List;
 
 public class WorkShift {
     private Long id;
-    private String Start;
-    private String End;
+    private String start;
+    private String end;
+    private Sector sector;
+    private String daysOfWeek;
     private List<Guard> guards;
 
     public Long getId() {
@@ -18,19 +19,35 @@ public class WorkShift {
     }
 
     public String getStart() {
-        return Start;
+        return start;
     }
 
     public void setStart(String start) {
-        Start = start;
+        this.start = start;
     }
 
     public String getEnd() {
-        return End;
+        return end;
     }
 
     public void setEnd(String end) {
-        End = end;
+        this.end = end;
+    }
+
+    public Sector getSector() {
+        return sector;
+    }
+
+    public void setSector(Sector sector) {
+        this.sector = sector;
+    }
+
+    public String getDaysOfWeek() {
+        return daysOfWeek;
+    }
+
+    public void setDaysOfWeek(String daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
     }
 
     public List<Guard> getGuards() {
@@ -45,8 +62,10 @@ public class WorkShift {
     public String toString() {
         return "WorkShift{" +
                 "id=" + id +
-                ", Start='" + Start + '\'' +
-                ", End='" + End + '\'' +
+                ", start='" + start + '\'' +
+                ", end='" + end + '\'' +
+                ", sector=" + sector +
+                ", days=" + daysOfWeek +
                 ", guards=" + guards +
                 '}';
     }

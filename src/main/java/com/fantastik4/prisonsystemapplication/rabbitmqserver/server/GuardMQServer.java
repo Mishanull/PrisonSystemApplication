@@ -1,6 +1,5 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqserver.server;
 
-
 import com.fantastik4.prisonsystemapplication.model.Guard;
 import com.fantastik4.prisonsystemapplication.services.EmailService;
 import com.fantastik4.prisonsystemapplication.services.GuardService;
@@ -61,7 +60,7 @@ public class GuardMQServer {
     }
 
     @RabbitListener(queues = "guards.get")
-    public String getGuards(Message message){
+    public String getGuards(){
         return guardService.getGuards();
     }
 

@@ -1,6 +1,5 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqserver.server;
 
-import com.fantastik4.prisonsystemapplication.model.Guard;
 import com.fantastik4.prisonsystemapplication.model.User;
 import com.fantastik4.prisonsystemapplication.services.LoggedUsersService;
 import com.fantastik4.prisonsystemapplication.services.UserService;
@@ -25,15 +24,12 @@ public class UserMQServer {
     @RabbitListener(queues="prison.users")
     public String getUser(Message message){
         try {
-            System.out.println(message);
             User user = userService.getUser(new String(message.getBody()));
-            System.out.println(user.getRole());
             if(user!=null) return gson.toJson(user);
             else throw new Exception("User not retrieved yet");
         }
         catch (Exception e){
             e.printStackTrace();
-//            System.exit(1);
             return "error";
         }
     }

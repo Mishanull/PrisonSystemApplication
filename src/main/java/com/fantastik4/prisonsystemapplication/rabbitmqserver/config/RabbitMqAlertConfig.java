@@ -1,8 +1,6 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqserver.config;
 
-import com.rabbitmq.client.AMQP;
 import org.springframework.amqp.core.*;
-import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,11 +17,7 @@ public class RabbitMqAlertConfig {
         return BindingBuilder.bind(alertQueue()).to(alertExchange()).with("alert.broadcast");
     }
     @Bean
-    public Queue listenAlertQueue(){
-        return new Queue("guards.listen.alert");
-    }
-    @Bean
-    public Binding listenAlertBinding(){
-        return BindingBuilder.bind(listenAlertQueue()).to(alertExchange()).with("guards.listen.alert");
+    public FanoutExchange fanoutExchange(){
+        return new FanoutExchange("guard.listen");
     }
 }
