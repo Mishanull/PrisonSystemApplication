@@ -45,13 +45,22 @@ public class WorkShiftServiceImpl implements WorkShiftService{
     public List<WorkShift> getWorkShifts() {
         try {
             WorkShiftList workShiftList = restTemplate.getForObject("https://localhost:7150/WorkShift", WorkShiftList.class);
-
             if (workShiftList == null) return null;
             else return workShiftList.getWorkShifts();
         }
         catch (Exception e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override public String getWorkShiftById(Long id) {
+        try {
+            return restTemplate.getForObject("https://localhost:7150/WorkShift/{id}", String.class, id);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
         }
     }
 

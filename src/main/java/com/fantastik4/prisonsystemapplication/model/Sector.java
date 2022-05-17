@@ -9,6 +9,8 @@ public class Sector {
         Capacity = capacity;
     }
 
+    public Sector() {}
+
     public long getId() {
         return id;
     }

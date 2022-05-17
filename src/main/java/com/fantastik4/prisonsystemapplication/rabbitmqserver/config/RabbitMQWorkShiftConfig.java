@@ -37,6 +37,14 @@ public class RabbitMQWorkShiftConfig {
     }
 
     @Bean
+    public Queue getWorkShiftByIdQueue(){return new Queue("workShift.getById");}
+    @Bean
+    public Binding getWorkShiftByIdBinding(){
+        return BindingBuilder.bind(getWorkShiftByIdQueue()).to(workShiftExchange()).with("workShift.getById");
+    }
+
+
+    @Bean
     public Queue updateWorkShiftQueue(){return new Queue("workShift.update");}
     @Bean
     public Binding updateWorkShiftBinding(){

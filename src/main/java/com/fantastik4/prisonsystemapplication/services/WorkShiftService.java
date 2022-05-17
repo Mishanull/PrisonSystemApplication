@@ -10,6 +10,7 @@ public interface WorkShiftService {
     String createWorkShift(String shift);
     String removeWorkShift(Long id);
     List<WorkShift> getWorkShifts();
+    String getWorkShiftById(Long id);
     String updateWorkShift(String jsonWorkShift);
     String addGuardToWorkShift(String guardId, String shiftId);
     String removeGuardFromWorkShift(String guardId, String shiftId);

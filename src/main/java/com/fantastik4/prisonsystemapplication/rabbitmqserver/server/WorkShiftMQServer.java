@@ -45,6 +45,12 @@ public class WorkShiftMQServer {
         return "fail";
     }
 
+    @RabbitListener(queues = "workShift.getById")
+    public String getWorkshiftById(Message message){
+        Long workShiftId = Long.parseLong(new String(message.getBody()));
+        return workShiftService.getWorkShiftById(workShiftId);
+    }
+
     @RabbitListener(queues = "workShift.update")
     String updateWorkShift(Message message){
         try {
