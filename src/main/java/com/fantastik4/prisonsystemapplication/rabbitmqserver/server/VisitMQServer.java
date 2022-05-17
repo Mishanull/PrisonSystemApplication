@@ -50,7 +50,7 @@ public class VisitMQServer {
         try {
             String[] strArray = new String[]{new String(message.getBody())};
             String id = strArray[0];
-            String status = strArray[0];
+            String status = strArray[1];
             return visitService.UpdateVisitStatus(id, status);
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,4 +58,3 @@ public class VisitMQServer {
         }
     }
 }
-
