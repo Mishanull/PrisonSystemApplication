@@ -41,7 +41,7 @@ public class PrisonerMQServer {
     }
 
     @RabbitListener(queues = "prisoners.get")
-    public String getPrisoners(Message message){
+    public String getPrisoners(){
         return prisonerService.getPrisoners();
     }
 }

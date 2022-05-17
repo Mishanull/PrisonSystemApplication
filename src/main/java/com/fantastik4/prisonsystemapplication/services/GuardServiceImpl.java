@@ -77,7 +77,6 @@ public class GuardServiceImpl implements GuardService{
     @Override public String getGuards() {
         try {
             GuardsList guardsList = restTemplate.getForObject("https://localhost:7150/Guard", GuardsList.class);
-            assert guardsList != null;
             return gson.toJson(guardsList.getGuards());
         }
         catch (Exception e){

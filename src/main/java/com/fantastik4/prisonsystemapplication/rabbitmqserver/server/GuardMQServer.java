@@ -57,7 +57,7 @@ public class GuardMQServer {
     }
 
     @RabbitListener(queues = "guards.get")
-    public String getGuards(Message message){
+    public String getGuards(){
         return guardService.getGuards();
     }
 

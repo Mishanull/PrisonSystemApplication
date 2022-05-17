@@ -7,7 +7,7 @@ public class WorkShift {
     private String start;
     private String end;
     private Sector sector;
-    private String days;
+    private String daysOfWeek;
     private List<Guard> guards;
 
     public Long getId() {
@@ -42,12 +42,12 @@ public class WorkShift {
         this.sector = sector;
     }
 
-    public String getDays() {
-        return days;
+    public String getDaysOfWeek() {
+        return daysOfWeek;
     }
 
-    public void setDays(String days) {
-        this.days = days;
+    public void setDaysOfWeek(String daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
     }
 
     public List<Guard> getGuards() {
@@ -65,7 +65,7 @@ public class WorkShift {
                 ", start='" + start + '\'' +
                 ", end='" + end + '\'' +
                 ", sector=" + sector +
-                ", days=" + days +
+                ", days=" + daysOfWeek +
                 ", guards=" + guards +
                 '}';
     }
