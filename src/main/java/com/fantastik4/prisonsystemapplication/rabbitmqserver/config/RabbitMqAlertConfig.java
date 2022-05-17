@@ -1,8 +1,6 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqserver.config;
 
-import com.rabbitmq.client.AMQP;
 import org.springframework.amqp.core.*;
-import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
