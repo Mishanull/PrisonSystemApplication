@@ -1,6 +1,6 @@
-package com.fantastik4.prisonsystemapplication.rabbitmqserver.server;
+package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
-import com.fantastik4.prisonsystemapplication.model.Guard;
+import com.fantastik4.prisonsystemapplication.models.Guard;
 import com.fantastik4.prisonsystemapplication.services.EmailService;
 import com.fantastik4.prisonsystemapplication.services.GuardService;
 import com.fantastik4.prisonsystemapplication.utils.PasswordGenerator;

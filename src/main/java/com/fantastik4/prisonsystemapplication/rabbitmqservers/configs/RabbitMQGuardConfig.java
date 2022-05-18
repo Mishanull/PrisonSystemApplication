@@ -1,4 +1,4 @@
-package com.fantastik4.prisonsystemapplication.rabbitmqserver.config;
+package com.fantastik4.prisonsystemapplication.rabbitmqservers.configs;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

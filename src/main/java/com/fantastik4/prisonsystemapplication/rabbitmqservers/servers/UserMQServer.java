@@ -1,6 +1,6 @@
-package com.fantastik4.prisonsystemapplication.rabbitmqserver.server;
+package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
-import com.fantastik4.prisonsystemapplication.model.User;
+import com.fantastik4.prisonsystemapplication.models.User;
 import com.fantastik4.prisonsystemapplication.services.LoggedUsersService;
 import com.fantastik4.prisonsystemapplication.services.UserService;
 import com.google.gson.Gson;

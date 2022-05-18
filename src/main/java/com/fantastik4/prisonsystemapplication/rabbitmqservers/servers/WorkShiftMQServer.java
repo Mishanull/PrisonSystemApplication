@@ -1,6 +1,6 @@
-package com.fantastik4.prisonsystemapplication.rabbitmqserver.server;
+package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
-import com.fantastik4.prisonsystemapplication.model.WorkShift;
+import com.fantastik4.prisonsystemapplication.models.WorkShift;
 import com.fantastik4.prisonsystemapplication.services.WorkShiftService;
 import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;

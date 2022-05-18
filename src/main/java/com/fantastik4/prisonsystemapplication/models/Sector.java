@@ -1,4 +1,4 @@
-package com.fantastik4.prisonsystemapplication.model;
+package com.fantastik4.prisonsystemapplication.models;
 
 public class Sector {
     private long id;

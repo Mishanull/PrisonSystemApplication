@@ -1,4 +1,4 @@
-package com.fantastik4.prisonsystemapplication.model;
+package com.fantastik4.prisonsystemapplication.models;
 
 import org.springframework.stereotype.Component;
 import java.io.Serializable;

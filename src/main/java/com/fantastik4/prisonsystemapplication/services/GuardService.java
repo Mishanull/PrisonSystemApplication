@@ -1,9 +1,7 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.model.Guard;
+import com.fantastik4.prisonsystemapplication.models.Guard;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public interface GuardService {

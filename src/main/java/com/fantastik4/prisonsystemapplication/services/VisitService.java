@@ -1,6 +1,6 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.model.Visit;
+import com.fantastik4.prisonsystemapplication.models.Visit;
 
 import java.util.List;
 
