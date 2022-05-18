@@ -31,7 +31,7 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public List<Visit> GetVisits() {
         try {
-            List<Visit> visitList = (List<Visit>) restTemplate.getForObject("https://localhost:7150/WorkShift", Visit.class);
+            List<Visit> visitList = (List<Visit>) restTemplate.getForObject("https://localhost:7150/Visit", Visit.class);
 
             return visitList;
         }

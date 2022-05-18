@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 
 public class Visit {
     private Long id;
-    private LocalDateTime dateTime;
+    private LocalDateTime visitDate;
+    private LocalDateTime visitTime;
     private Status status0;
     private String accessCode;
     private String  firstName;
