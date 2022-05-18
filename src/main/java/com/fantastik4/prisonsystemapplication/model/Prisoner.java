@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = Prisoner.class)
 public class Prisoner {
@@ -15,12 +17,14 @@ public class Prisoner {
     public String crimeCommitted;
     public int points;
     public String note;
+    public LocalDateTime entryDate;
+    public int durationInMonths;
 
 
     public Prisoner() {
     }
 
-    public Prisoner(long id, String firstName, String lastName, int ssn, String crimeCommitted, int points, String note) {
+    public Prisoner(long id, String firstName, String lastName, int ssn, String crimeCommitted, int points, String note, LocalDateTime entryDate, int durationInMonths) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,6 +32,8 @@ public class Prisoner {
         this.crimeCommitted = crimeCommitted;
         this.points = points;
         this.note = note;
+        this.entryDate = entryDate;
+        this.durationInMonths = durationInMonths;
     }
 
     public long getId() {
@@ -86,6 +92,22 @@ public class Prisoner {
         this.note = note;
     }
 
+    public LocalDateTime getEntryDate() {
+        return entryDate;
+    }
+
+    public void setEntryDate(LocalDateTime entryDate) {
+        this.entryDate = entryDate;
+    }
+
+    public int getDurationInMonths() {
+        return durationInMonths;
+    }
+
+    public void setDurationInMonths(int durationInMonths) {
+        this.durationInMonths = durationInMonths;
+    }
+
     @Override
     public String toString() {
         return "Prisoner{" +
@@ -96,6 +118,8 @@ public class Prisoner {
                 ", crimeCommitted='" + crimeCommitted + '\'' +
                 ", points=" + points +
                 ", note='" + note + '\'' +
+                ", entryDate=" + entryDate +
+                ", durationInMonths=" + durationInMonths +
                 '}';
     }
 }
