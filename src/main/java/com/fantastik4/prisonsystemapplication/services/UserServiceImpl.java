@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(String username) {
+    public  User getUser(String username) {
         try {
             return restTemplate.getForObject("https://localhost:7150/User/{username}", User.class, username);
         }catch (Exception e){

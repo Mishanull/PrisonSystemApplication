@@ -1,6 +1,7 @@
 package com.fantastik4.prisonsystemapplication.services;
 
 import com.fantastik4.prisonsystemapplication.models.Visit;
+import com.fantastik4.prisonsystemapplication.models.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -59,7 +60,7 @@ public class VisitServiceImpl implements VisitService {
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<String> request = new HttpEntity<>(id, headers);
             HttpEntity<String> request2 = new HttpEntity<>(status, headers);
-            restTemplate.patchForObject("https://localhost:7150/Visit", request, Visit.class, request2, Visit.Status.class);
+            restTemplate.patchForObject("https://localhost:7150/Visit", request, Visit.class, request2, Status.class);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();
