@@ -1,6 +1,6 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.model.*;
+import com.fantastik4.prisonsystemapplication.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

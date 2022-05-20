@@ -1,9 +1,6 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.model.Prisoner;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public interface PrisonerService {

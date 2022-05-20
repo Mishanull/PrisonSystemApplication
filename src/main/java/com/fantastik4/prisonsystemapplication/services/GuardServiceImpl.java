@@ -1,7 +1,7 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.model.Guard;
-import com.fantastik4.prisonsystemapplication.model.GuardsList;
+import com.fantastik4.prisonsystemapplication.models.Guard;
+import com.fantastik4.prisonsystemapplication.models.GuardsList;
 import com.fantastik4.prisonsystemapplication.utils.UsernameGenerator;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.fantastik4.prisonsystemapplication.services.config;
+package com.fantastik4.prisonsystemapplication.services.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

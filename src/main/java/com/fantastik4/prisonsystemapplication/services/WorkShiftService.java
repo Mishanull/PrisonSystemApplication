@@ -1,6 +1,6 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.model.WorkShift;
+import com.fantastik4.prisonsystemapplication.models.WorkShift;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

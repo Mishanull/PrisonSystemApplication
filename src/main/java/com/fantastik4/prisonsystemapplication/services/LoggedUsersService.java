@@ -1,8 +1,7 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.model.Guard;
-import com.fantastik4.prisonsystemapplication.model.User;
-import org.springframework.stereotype.Component;
+import com.fantastik4.prisonsystemapplication.models.Guard;
+import com.fantastik4.prisonsystemapplication.models.User;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

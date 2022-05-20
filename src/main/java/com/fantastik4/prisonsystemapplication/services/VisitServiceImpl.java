@@ -1,6 +1,6 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.model.Visit;
+import com.fantastik4.prisonsystemapplication.models.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -31,7 +31,7 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public List<Visit> GetVisits() {
         try {
-            List<Visit> visitList = (List<Visit>) restTemplate.getForObject("https://localhost:7150/WorkShift", Visit.class);
+            List<Visit> visitList = (List<Visit>) restTemplate.getForObject("https://localhost:7150/Visit", Visit.class);
 
             return visitList;
         }
