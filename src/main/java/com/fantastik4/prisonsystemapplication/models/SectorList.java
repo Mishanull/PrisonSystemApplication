@@ -1,4 +1,6 @@
-package com.fantastik4.prisonsystemapplication.model;
+package com.fantastik4.prisonsystemapplication.models;
+
+import com.fantastik4.prisonsystemapplication.models.Sector;
 
 import java.util.ArrayList;
 import java.util.List;

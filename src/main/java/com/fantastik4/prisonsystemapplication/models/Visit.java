@@ -17,6 +17,8 @@ public class Visit {
     {
         Waiting,
         Denied,
-        Approved
+        Approved,
+        OnVisit,
+        Left
     }
 }
