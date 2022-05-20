@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = Prisoner.class)
 public class Prisoner {
@@ -15,12 +17,15 @@ public class Prisoner {
     public String crimeCommitted;
     public int points;
     public String note;
-
+//    public LocalDateTime entryDate;
+    public String entryDate;
+    public int durationInMonths;
+    public Sector sector;
 
     public Prisoner() {
     }
 
-    public Prisoner(long id, String firstName, String lastName, int ssn, String crimeCommitted, int points, String note) {
+    public Prisoner(long id, String firstName, String lastName, int ssn, String crimeCommitted, int points, String note, String entryDate, int durationInMonths, Sector sector) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,6 +33,9 @@ public class Prisoner {
         this.crimeCommitted = crimeCommitted;
         this.points = points;
         this.note = note;
+        this.entryDate = entryDate;
+        this.durationInMonths = durationInMonths;
+        this.sector = sector;
     }
 
     public long getId() {
@@ -38,53 +46,6 @@ public class Prisoner {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getSsn() {
-        return ssn;
-    }
-
-    public void setSsn(int ssn) {
-        this.ssn = ssn;
-    }
-
-    public String getCrimeCommitted() {
-        return crimeCommitted;
-    }
-
-    public void setCrimeCommitted(String crimeCommitted) {
-        this.crimeCommitted = crimeCommitted;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
 
     @Override
     public String toString() {
@@ -96,6 +57,8 @@ public class Prisoner {
                 ", crimeCommitted='" + crimeCommitted + '\'' +
                 ", points=" + points +
                 ", note='" + note + '\'' +
+                ", entryDate=" + entryDate +
+                ", durationInMonths=" + durationInMonths +
                 '}';
     }
 }
