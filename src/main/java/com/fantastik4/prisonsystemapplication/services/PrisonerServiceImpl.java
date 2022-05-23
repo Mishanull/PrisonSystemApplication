@@ -62,17 +62,6 @@ public class PrisonerServiceImpl implements PrisonerService{
         }
     }
 
-//    @Override
-//    public String getPrisoners() {
-//        try {
-//            PrisonersList prisonersList = restTemplate.getForObject("https://localhost:7150/Prisoner", PrisonersList.class);
-//            return gson.toJson(prisonersList.getPrisoners());
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//            return "fail";
-//        }
-//    }
     @Override
     public String getPrisoners(String pageNumber, String pageSize) {
         try {

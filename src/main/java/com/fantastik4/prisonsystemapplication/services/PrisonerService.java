@@ -9,6 +9,5 @@ public  interface PrisonerService {
     String getPrisonerById(Long prisonerId);
     String updatePrisoner(String jsonPrisoner);
     String getPrisonerBySSN(String ssn);
-    //    String getPrisoners();
     String getPrisoners(String pageNumber, String pageSize);
 }
