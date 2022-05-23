@@ -95,13 +95,9 @@ public class WorkShiftServiceImpl implements WorkShiftService{
     }
 
     @Override
-    public String removeGuardFromWorkShift(String[] guardIdAndShiftId) {
+    public String removeGuardFromWorkShift(long guardId, long shiftId) {
         try {
-            String[] request=new String[3];
-            request[0]=guardIdAndShiftId[0];
-            request[1]=guardIdAndShiftId[1];
-
-            restTemplate.patchForObject("https://localhost:7150/WorkShift", request, String.class);
+            restTemplate.patchForObject("https://localhost:7150/WorkShift/removeGuard/{guardId:long}/{shiftId:long}", String.class, String.class, guardId, shiftId);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();

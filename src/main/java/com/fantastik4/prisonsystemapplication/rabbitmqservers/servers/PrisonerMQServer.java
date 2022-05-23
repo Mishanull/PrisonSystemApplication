@@ -1,6 +1,5 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
-import com.fantastik4.prisonsystemapplication.models.Prisoner;
 import com.fantastik4.prisonsystemapplication.services.PrisonerService;
 import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
