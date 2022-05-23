@@ -33,8 +33,11 @@ public class VisitMQServer {
     }
 
     @RabbitListener(queues = "visit.get")
-    public String GetVisits(){
-            return visitService.GetVisits();
+    public String GetVisits(Message message){
+        String response = new String(message.getBody());
+        String[] pagination=new String[2];
+        pagination = gson.fromJson(response,String[].class);
+        return visitService.GetVisits(pagination[0],pagination[1]);
     }
 
     @RabbitListener(queues = "visit.getByCode")

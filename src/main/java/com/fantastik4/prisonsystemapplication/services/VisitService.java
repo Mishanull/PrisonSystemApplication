@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface VisitService {
     String CreateVisit(String visit);
-    String GetVisits();
+    String GetVisits(String pageNumber, String pageSize);
     String GetVisitByAccessCode(String code);
     String UpdateVisitStatus(String[] statusAndId);
 }

@@ -47,9 +47,9 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public String GetVisits() {
+    public String GetVisits(String pageNumber, String pageSize) {
         try {
-            return restTemplate.getForObject("https://localhost:7150/Visit", String.class);
+            return restTemplate.getForObject("https://localhost:7150/Visit?pageNumber="+pageNumber+"&pageSize="+pageSize, String.class);
         }
         catch (Exception e){
             e.printStackTrace();
