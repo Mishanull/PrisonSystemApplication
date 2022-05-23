@@ -1,7 +1,5 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.models.SectorList;
-import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,8 +14,7 @@ public class SectorServiceImpl implements SectorService{
     @Override
     public String getSectors() {
         try {
-            SectorList sectorList = restTemplate.getForObject("https://localhost:7150/Sector", SectorList.class);
-            return new Gson().toJson(sectorList.getSectors());
+            return restTemplate.getForObject("https://localhost:7150/Sector", String.class);
         }
         catch (Exception e){
             e.printStackTrace();

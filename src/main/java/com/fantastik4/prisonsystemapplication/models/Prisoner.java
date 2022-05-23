@@ -1,16 +1,16 @@
 package com.fantastik4.prisonsystemapplication.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Component
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = Prisoner.class)
-public class Prisoner implements Serializable {
+public class Prisoner  {
     public long id;
     public String  firstName;
     public String  lastName;
@@ -18,7 +18,9 @@ public class Prisoner implements Serializable {
     public String crimeCommitted;
     public int points;
 //    public LocalDateTime entryDate;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssX")
     public Date entryDate;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssX")
     public Date releaseDate;
     public Sector sector;
     public List<Note> notes;

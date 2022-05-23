@@ -1,5 +1,6 @@
 package com.fantastik4.prisonsystemapplication.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -7,11 +8,25 @@ import java.util.List;
 @Component
 public class WorkShift {
     private Long id;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssX")
     private Date start;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssX")
     private Date end;
     private Sector sector;
     private String daysOfWeek;
     private List<Guard> guards;
+
+    public WorkShift(Long id, Date start, Date end, Sector sector, String daysOfWeek, List<Guard> guards) {
+        this.id = id;
+        this.start = start;
+        this.end = end;
+        this.sector = sector;
+        this.daysOfWeek = daysOfWeek;
+        this.guards = guards;
+    }
+
+    public WorkShift() {
+    }
 
     public Long getId() {
         return id;

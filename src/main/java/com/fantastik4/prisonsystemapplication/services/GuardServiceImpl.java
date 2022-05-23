@@ -1,7 +1,6 @@
 package com.fantastik4.prisonsystemapplication.services;
 
 import com.fantastik4.prisonsystemapplication.models.Guard;
-import com.fantastik4.prisonsystemapplication.models.GuardsList;
 import com.fantastik4.prisonsystemapplication.utils.UsernameGenerator;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,8 +75,8 @@ public class GuardServiceImpl implements GuardService{
 
     @Override public String getGuards() {
         try {
-            GuardsList guardsList = restTemplate.getForObject("https://localhost:7150/Guard", GuardsList.class);
-            return gson.toJson(guardsList.getGuards());
+            return restTemplate.getForObject("https://localhost:7150/Guard", String.class);
+
         }
         catch (Exception e){
             e.printStackTrace();

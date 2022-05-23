@@ -46,8 +46,7 @@ public class WorkShiftServiceImpl implements WorkShiftService{
     @Override
     public String getWorkShifts() {
         try {
-            WorkShiftList workShiftList = restTemplate.getForObject("https://localhost:7150/WorkShift", WorkShiftList.class);
-            return gson.toJson(workShiftList.getWorkShifts());
+            return restTemplate.getForObject("https://localhost:7150/WorkShift", String.class);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -87,7 +86,7 @@ public class WorkShiftServiceImpl implements WorkShiftService{
             request[0]=guardIdAndShiftId[0];
             request[1]=guardIdAndShiftId[1];
 
-            restTemplate.patchForObject("https://localhost:7150/WorkShift", request, String.class);
+            restTemplate.patchForObject("https://localhost:7150/WorkShift/{id}", request, String.class);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();

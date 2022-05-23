@@ -23,11 +23,11 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public String AddNote(String[] prisonerIdAndText) {
         try {
-            String[] request = new String[3];
+            String[] request = new String[2];
             request[0] = prisonerIdAndText[0];
             request[1] = prisonerIdAndText[1];
 
-            restTemplate.postForObject("https://localhost:7150/Note/{noteId}", request, String.class);
+            restTemplate.postForObject("https://localhost:7150/Note", request, String.class);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();

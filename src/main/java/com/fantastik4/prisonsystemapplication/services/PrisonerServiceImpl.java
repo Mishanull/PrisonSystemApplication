@@ -1,9 +1,7 @@
 package com.fantastik4.prisonsystemapplication.services;
 
 import com.fantastik4.prisonsystemapplication.models.Prisoner;
-import com.fantastik4.prisonsystemapplication.models.PrisonersList;
 import com.google.gson.Gson;
-import com.sun.mail.iap.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -65,8 +63,7 @@ public class PrisonerServiceImpl implements PrisonerService{
     @Override
     public String getPrisoners() {
         try {
-            PrisonersList prisonersList = restTemplate.getForObject("https://localhost:7150/Prisoner", PrisonersList.class);
-            return gson.toJson(prisonersList.getPrisoners());
+            return restTemplate.getForObject("https://localhost:7150/Prisoner", String.class);
         }
         catch (Exception e){
             e.printStackTrace();
