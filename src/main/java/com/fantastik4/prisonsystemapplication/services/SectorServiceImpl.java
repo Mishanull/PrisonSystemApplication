@@ -1,6 +1,6 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.model.SectorList;
+import com.fantastik4.prisonsystemapplication.models.SectorList;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

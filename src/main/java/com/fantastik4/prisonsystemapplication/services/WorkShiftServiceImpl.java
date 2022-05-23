@@ -1,6 +1,7 @@
 package com.fantastik4.prisonsystemapplication.services;
 
 import com.fantastik4.prisonsystemapplication.models.*;
+import com.google.gson.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -8,16 +9,17 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 
 @Service
 public class WorkShiftServiceImpl implements WorkShiftService{
 
     private final RestTemplate restTemplate;
+    private Gson gson;
 
     @Autowired
     public WorkShiftServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
+        gson = new Gson();
     }
 
     @Override
@@ -42,11 +44,10 @@ public class WorkShiftServiceImpl implements WorkShiftService{
     }
 
     @Override
-    public List<WorkShift> getWorkShifts() {
+    public String getWorkShifts() {
         try {
             WorkShiftList workShiftList = restTemplate.getForObject("https://localhost:7150/WorkShift", WorkShiftList.class);
-            if (workShiftList == null) return null;
-            else return workShiftList.getWorkShifts();
+            return gson.toJson(workShiftList.getWorkShifts());
         }
         catch (Exception e){
             e.printStackTrace();

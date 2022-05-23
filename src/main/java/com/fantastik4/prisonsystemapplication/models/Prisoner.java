@@ -4,37 +4,38 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = Prisoner.class)
-public class Prisoner {
-
+public class Prisoner implements Serializable {
     public long id;
     public String  firstName;
     public String  lastName;
     public int ssn;
     public String crimeCommitted;
     public int points;
-    public String note;
 //    public LocalDateTime entryDate;
-    public String entryDate;
-    public int durationInMonths;
+    public LocalDateTime entryDate;
+    public LocalDateTime releaseDate;
     public Sector sector;
+    public List<Note> notes;
 
     public Prisoner() {
     }
 
-    public Prisoner(long id, String firstName, String lastName, int ssn, String crimeCommitted, int points, String note, String entryDate, int durationInMonths, Sector sector) {
+    public Prisoner(long id, String firstName, String lastName, int ssn, String crimeCommitted, int points, List<Note> notes, LocalDateTime entryDate, LocalDateTime releaseDate, Sector sector) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.ssn = ssn;
         this.crimeCommitted = crimeCommitted;
         this.points = points;
-        this.note = note;
+        this.notes = notes;
         this.entryDate = entryDate;
-        this.durationInMonths = durationInMonths;
+        this.releaseDate = releaseDate;
         this.sector = sector;
     }
 
@@ -56,9 +57,9 @@ public class Prisoner {
                 ", ssn=" + ssn +
                 ", crimeCommitted='" + crimeCommitted + '\'' +
                 ", points=" + points +
-                ", note='" + note + '\'' +
+                ", note='" + notes + '\'' +
                 ", entryDate=" + entryDate +
-                ", durationInMonths=" + durationInMonths +
+                ", durationInMonths=" + releaseDate +
                 '}';
     }
 }

@@ -1,11 +1,19 @@
 package com.fantastik4.prisonsystemapplication.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public class WorkShift {
+@Component
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = WorkShift.class)
+public class WorkShift implements Serializable {
     private Long id;
-    private String start;
-    private String end;
+    private LocalDateTime start;
+    private LocalDateTime end;
     private Sector sector;
     private String daysOfWeek;
     private List<Guard> guards;
@@ -18,43 +26,14 @@ public class WorkShift {
         this.id = id;
     }
 
-    public String getStart() {
-        return start;
-    }
+    public WorkShift() {}
 
-    public void setStart(String start) {
+    public WorkShift(Long id, LocalDateTime start, LocalDateTime end, Sector sector, String daysOfWeek, List<Guard> guards) {
+        this.id = id;
         this.start = start;
-    }
-
-    public String getEnd() {
-        return end;
-    }
-
-    public void setEnd(String end) {
         this.end = end;
-    }
-
-    public Sector getSector() {
-        return sector;
-    }
-
-    public void setSector(Sector sector) {
         this.sector = sector;
-    }
-
-    public String getDaysOfWeek() {
-        return daysOfWeek;
-    }
-
-    public void setDaysOfWeek(String daysOfWeek) {
         this.daysOfWeek = daysOfWeek;
-    }
-
-    public List<Guard> getGuards() {
-        return guards;
-    }
-
-    public void setGuards(List<Guard> guards) {
         this.guards = guards;
     }
 

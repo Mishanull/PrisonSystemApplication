@@ -1,6 +1,5 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
-import com.fantastik4.prisonsystemapplication.models.WorkShift;
 import com.fantastik4.prisonsystemapplication.services.WorkShiftService;
 import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
@@ -39,14 +38,12 @@ public class WorkShiftMQServer {
     }
 
     @RabbitListener(queues = "workShift.get")
-    public String GetWorkShiftsAsync(Message message){
-        List<WorkShift> shifts = workShiftService.getWorkShifts();
-        if (shifts!=null) return gson.toJson(shifts);
-        return "fail";
+    public String GetWorkShiftsAsync(){
+        return workShiftService.getWorkShifts();
     }
 
     @RabbitListener(queues = "workShift.getById")
-    public String getWorkshiftById(Message message){
+    public String getWorkShiftById(Message message){
         Long workShiftId = Long.parseLong(new String(message.getBody()));
         return workShiftService.getWorkShiftById(workShiftId);
     }

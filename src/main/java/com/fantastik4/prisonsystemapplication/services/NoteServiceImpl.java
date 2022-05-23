@@ -1,0 +1,62 @@
+package com.fantastik4.prisonsystemapplication.services;
+
+import com.fantastik4.prisonsystemapplication.models.Note;
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+@Service
+public class NoteServiceImpl implements NoteService {
+    private final RestTemplate restTemplate;
+    private Gson gson;
+
+    @Autowired
+    public NoteServiceImpl(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+        gson = new Gson();
+    }
+
+    @Override
+    public String AddNote(long prisonerId, String text) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<String> request = new HttpEntity<>(text, headers);
+            restTemplate.patchForObject("https://localhost:7150/Note/{prisonerId}", prisonerId, String.class, request, String.class);
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String RemoveNote ( long noteId) {
+        try {
+            restTemplate.delete("https://localhost:7150/Note/{noteId}", noteId);
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String UpdateNote(String note) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<String> request = new HttpEntity<>(note, headers);
+            restTemplate.patchForObject("https://localhost:7150/Note", request, Note.class);
+            return "success";
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+}

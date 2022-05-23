@@ -9,7 +9,7 @@ import java.util.List;
 public interface WorkShiftService {
     String createWorkShift(String shift);
     String removeWorkShift(Long id);
-    List<WorkShift> getWorkShifts();
+    String getWorkShifts();
     String getWorkShiftById(Long id);
     String updateWorkShift(String jsonWorkShift);
     String addGuardToWorkShift(String guardId, String shiftId);

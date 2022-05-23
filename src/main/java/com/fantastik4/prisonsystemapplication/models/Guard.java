@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 @Component
-
 public class Guard extends User implements Serializable {
 
     private String email;

@@ -34,9 +34,7 @@ public class VisitMQServer {
 
     @RabbitListener(queues = "visit.get")
     public String GetVisits(){
-            List<Visit> visits = visitService.GetVisits();
-            if (visits!=null) return gson.toJson(visits);
-            return "fail";
+        return visitService.GetVisits();
     }
 
     @RabbitListener(queues = "visit.getByCode")

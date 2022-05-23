@@ -1,6 +1,7 @@
 package com.fantastik4.prisonsystemapplication.services;
 
 import com.fantastik4.prisonsystemapplication.models.Visit;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,10 +14,12 @@ import java.util.List;
 public class VisitServiceImpl implements VisitService {
 
     private final RestTemplate restTemplate;
+    private Gson gson;
 
     @Autowired
     public VisitServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
+        gson = new Gson();
     }
 
     @Override
@@ -29,11 +32,10 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public List<Visit> GetVisits() {
+    public String GetVisits() {
         try {
             List<Visit> visitList = (List<Visit>) restTemplate.getForObject("https://localhost:7150/Visit", Visit.class);
-
-            return visitList;
+            return gson.toJson(visitList);
         }
         catch (Exception e){
             e.printStackTrace();
