@@ -1,6 +1,8 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
+import com.fantastik4.prisonsystemapplication.models.Prisoner;
 import com.fantastik4.prisonsystemapplication.services.PrisonerService;
+import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrisonerMQServer {
     private PrisonerService prisonerService;
-
+    private Gson gson=new Gson();
     @Autowired
     public PrisonerMQServer(PrisonerService prisonerService) {
         this.prisonerService = prisonerService;
@@ -43,5 +45,11 @@ public class PrisonerMQServer {
     @RabbitListener(queues = "prisoners.get")
     public String getPrisoners(){
         return prisonerService.getPrisoners();
+    }
+    @RabbitListener(queues = "prisoner.getBySSN")
+    public String getPrisonerBySSN(Message message){
+        String SSN=new String(message.getBody());
+        String p=prisonerService.getPrisonerBySSN(SSN);
+        return p;
     }
 }

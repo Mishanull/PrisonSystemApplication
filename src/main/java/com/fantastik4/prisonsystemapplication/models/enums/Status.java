@@ -6,5 +6,6 @@ import java.io.Serializable;
 public enum Status implements Serializable {
     Waiting,
     Denied,
-    Approved
+    Approved,
+    Fulfilled
 }

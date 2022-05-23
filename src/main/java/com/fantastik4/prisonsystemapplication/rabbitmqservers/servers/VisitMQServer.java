@@ -34,9 +34,7 @@ public class VisitMQServer {
 
     @RabbitListener(queues = "visit.get")
     public String GetVisits(){
-            List<Visit> visits = visitService.GetVisits();
-            if (visits!=null) return gson.toJson(visits);
-            return "fail";
+            return visitService.GetVisits();
     }
 
     @RabbitListener(queues = "visit.getByCode")
@@ -48,10 +46,11 @@ public class VisitMQServer {
     @RabbitListener(queues = "visit.update")
     String UpdateVisitStatus(Message message){
         try {
-            String[] strArray = new String[]{new String(message.getBody())};
-            String id = strArray[0];
-            String status = strArray[1];
-            return visitService.UpdateVisitStatus(id, status);
+
+            String response = new String(message.getBody());
+            String[] strArray=new String[3];
+            strArray=gson.fromJson(response,String[].class);
+            return visitService.UpdateVisitStatus(strArray);
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";
