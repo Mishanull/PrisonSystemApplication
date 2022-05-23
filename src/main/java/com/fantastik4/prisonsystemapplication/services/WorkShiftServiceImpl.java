@@ -96,13 +96,13 @@ public class WorkShiftServiceImpl implements WorkShiftService{
     }
 
     @Override
-    public String removeGuardFromWorkShift(String guardId, String shiftId) {
+    public String removeGuardFromWorkShift(long guardId, long shiftId) {
         try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<String> request = new HttpEntity<>(guardId, headers);
-            HttpEntity<String> request2 = new HttpEntity<>(shiftId, headers);
-            restTemplate.patchForObject("https://localhost:7150/WorkShift/removeGuard/{guardId:int}/{shiftId:int}", request, Guard.class, request2, WorkShift.class);
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_JSON);
+//            HttpEntity<String> request = new HttpEntity<>(guardId, headers);
+//            HttpEntity<String> request2 = new HttpEntity<>(shiftId, headers);
+            restTemplate.patchForObject("https://localhost:7150/WorkShift/removeGuard/{guardId:long}/{shiftId:long}", String.class, String.class, guardId, shiftId);
             return "success";
         }
         catch (Exception e){
