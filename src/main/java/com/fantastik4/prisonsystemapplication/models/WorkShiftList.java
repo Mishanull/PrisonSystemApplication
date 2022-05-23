@@ -1,8 +1,10 @@
 package com.fantastik4.prisonsystemapplication.models;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class WorkShiftList {
     private List<WorkShift> shifts;
 
