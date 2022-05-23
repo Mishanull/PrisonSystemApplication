@@ -62,10 +62,21 @@ public class PrisonerServiceImpl implements PrisonerService{
         }
     }
 
+//    @Override
+//    public String getPrisoners() {
+//        try {
+//            PrisonersList prisonersList = restTemplate.getForObject("https://localhost:7150/Prisoner", PrisonersList.class);
+//            return gson.toJson(prisonersList.getPrisoners());
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            return "fail";
+//        }
+//    }
     @Override
-    public String getPrisoners() {
+    public String getPrisoners(String pageNumber, String pageSize) {
         try {
-            PrisonersList prisonersList = restTemplate.getForObject("https://localhost:7150/Prisoner", PrisonersList.class);
+            PrisonersList prisonersList = restTemplate.getForObject("https://localhost:7150/Prisoner?pageNumber="+pageNumber+"&pageSize="+pageSize, PrisonersList.class);
             return gson.toJson(prisonersList.getPrisoners());
         }
         catch (Exception e){
@@ -99,4 +110,5 @@ public class PrisonerServiceImpl implements PrisonerService{
             return "fail";
         }
     }
+
 }
