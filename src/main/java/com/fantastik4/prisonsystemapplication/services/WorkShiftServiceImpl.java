@@ -81,32 +81,31 @@ public class WorkShiftServiceImpl implements WorkShiftService{
     }
 
     @Override
-    public String addGuardToWorkShift(String guardId, String shiftId) {
+    public String addGuardToWorkShift(String[] guardIdAndShiftId) {
         try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<String> request = new HttpEntity<>(guardId, headers);
-            HttpEntity<String> request2 = new HttpEntity<>(shiftId, headers);
-            restTemplate.patchForObject("https://localhost:7150/WorkShift/addGuard/{guardId:int}/{shiftId:int}", request, Guard.class, request2, WorkShift.class);
+            String[] request=new String[3];
+            request[0]=guardIdAndShiftId[0];
+            request[1]=guardIdAndShiftId[1];
+
+            restTemplate.patchForObject("https://localhost:7150/WorkShift", request, String.class);
             return "success";
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return "fail";
         }
+
     }
 
     @Override
-    public String removeGuardFromWorkShift(String guardId, String shiftId) {
+    public String removeGuardFromWorkShift(String[] guardIdAndShiftId) {
         try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<String> request = new HttpEntity<>(guardId, headers);
-            HttpEntity<String> request2 = new HttpEntity<>(shiftId, headers);
-            restTemplate.patchForObject("https://localhost:7150/WorkShift/removeGuard/{guardId:int}/{shiftId:int}", request, Guard.class, request2, WorkShift.class);
+            String[] request=new String[3];
+            request[0]=guardIdAndShiftId[0];
+            request[1]=guardIdAndShiftId[1];
+
+            restTemplate.patchForObject("https://localhost:7150/WorkShift", request, String.class);
             return "success";
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return "fail";
         }

@@ -2,12 +2,13 @@ package com.fantastik4.prisonsystemapplication.models;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 @Component
 public class WorkShift {
     private Long id;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private Date start;
+    private Date end;
     private Sector sector;
     private String daysOfWeek;
     private List<Guard> guards;
@@ -20,19 +21,19 @@ public class WorkShift {
         this.id = id;
     }
 
-    public String getStart() {
+    public Date getStart() {
         return start;
     }
 
-    public void setStart(String start) {
+    public void setStart(Date start) {
         this.start = start;
     }
 
-    public String getEnd() {
+    public Date getEnd() {
         return end;
     }
 
-    public void setEnd(String end) {
+    public void setEnd(Date end) {
         this.end = end;
     }
 

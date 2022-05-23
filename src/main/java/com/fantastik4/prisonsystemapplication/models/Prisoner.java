@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -18,15 +18,15 @@ public class Prisoner implements Serializable {
     public String crimeCommitted;
     public int points;
 //    public LocalDateTime entryDate;
-    public LocalDateTime entryDate;
-    public LocalDateTime releaseDate;
+    public Date entryDate;
+    public Date releaseDate;
     public Sector sector;
     public List<Note> notes;
 
     public Prisoner() {
     }
 
-    public Prisoner(long id, String firstName, String lastName, int ssn, String crimeCommitted, int points, List<Note> notes, LocalDateTime entryDate, LocalDateTime releaseDate, Sector sector) {
+    public Prisoner(long id, String firstName, String lastName, int ssn, String crimeCommitted, int points, List<Note> notes, Date entryDate, Date releaseDate, Sector sector) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

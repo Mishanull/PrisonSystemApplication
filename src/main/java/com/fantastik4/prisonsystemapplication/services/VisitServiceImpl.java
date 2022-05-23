@@ -1,27 +1,14 @@
 package com.fantastik4.prisonsystemapplication.services;
 
 import com.fantastik4.prisonsystemapplication.models.Visit;
-import com.fantastik4.prisonsystemapplication.models.enums.Status;
 import com.fantastik4.prisonsystemapplication.utils.PasswordGenerator;
 import com.google.gson.*;
-import org.apache.tomcat.jni.Local;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.lang.reflect.Type;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAmount;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class VisitServiceImpl implements VisitService {
@@ -31,7 +18,7 @@ public class VisitServiceImpl implements VisitService {
     private final Gson gson;
 
     @Autowired
-    public VisitServiceImpl(RestTemplate restTemplate) {
+    public VisitServiceImpl(RestTemplate restTemplate,EmailService emailService) {
         this.restTemplate = restTemplate;
         this.emailService=emailService;
         this.gson = new Gson();
@@ -94,3 +81,4 @@ public class VisitServiceImpl implements VisitService {
         }
     }
 }
+

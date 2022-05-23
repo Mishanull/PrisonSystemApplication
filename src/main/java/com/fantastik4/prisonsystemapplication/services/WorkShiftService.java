@@ -1,9 +1,7 @@
 package com.fantastik4.prisonsystemapplication.services;
 
-import com.fantastik4.prisonsystemapplication.models.WorkShift;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public interface WorkShiftService {
@@ -12,6 +10,6 @@ public interface WorkShiftService {
     String getWorkShifts();
     String getWorkShiftById(Long id);
     String updateWorkShift(String jsonWorkShift);
-    String addGuardToWorkShift(String guardId, String shiftId);
-    String removeGuardFromWorkShift(String guardId, String shiftId);
+    String addGuardToWorkShift(String[] guardIdAndShiftId);
+    String removeGuardFromWorkShift(String[] guardIdAndShiftId);
 }

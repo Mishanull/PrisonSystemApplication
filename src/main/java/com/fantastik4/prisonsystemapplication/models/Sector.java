@@ -1,11 +1,8 @@
 package com.fantastik4.prisonsystemapplication.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.stereotype.Component;
 
 @Component
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = Sector.class)
 public class Sector {
     private long id;
     private int Capacity;

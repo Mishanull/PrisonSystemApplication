@@ -7,7 +7,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
 @Component
 public class WorkShiftMQServer {
@@ -62,10 +61,10 @@ public class WorkShiftMQServer {
     @RabbitListener(queues = "workShift.addGuard")
     String addGuardToWorkShiftAsync(Message message) {
         try {
-            String[] strArray = new String[]{new String(message.getBody())};
-            String guardId = strArray[0];
-            String shiftId = strArray[1];
-            return workShiftService.addGuardToWorkShift(guardId, shiftId);
+            String response = new String(message.getBody());
+            String[] strArray;
+            strArray=gson.fromJson(response,String[].class);
+            return workShiftService.addGuardToWorkShift(strArray);
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";
@@ -75,10 +74,10 @@ public class WorkShiftMQServer {
     @RabbitListener(queues = "workShift.removeGuard")
     String removeGuardFromWorkShiftAsync(Message message) {
         try {
-            String[] strArray = new String[]{new String(message.getBody())};
-            String guardId = strArray[0];
-            String shiftId = strArray[1];
-            return workShiftService.removeGuardFromWorkShift(guardId, shiftId);
+            String response = new String(message.getBody());
+            String[] strArray;
+            strArray=gson.fromJson(response,String[].class);
+            return workShiftService.removeGuardFromWorkShift(strArray);
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";
