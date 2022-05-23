@@ -74,10 +74,12 @@ public class WorkShiftMQServer {
     @RabbitListener(queues = "workShift.removeGuard")
     String removeGuardFromWorkShiftAsync(Message message) {
         try {
-            String response = new String(message.getBody());
-            String[] strArray;
-            strArray=gson.fromJson(response,String[].class);
-            return workShiftService.removeGuardFromWorkShift(strArray);
+            String ids = new String(message.getBody());
+            char[] idsArray = ids.toCharArray();
+            long guardId = Character.getNumericValue(idsArray[1]);
+            long shiftId = Character.getNumericValue(idsArray[2]);
+            return workShiftService.removeGuardFromWorkShift(guardId, shiftId);
+
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";

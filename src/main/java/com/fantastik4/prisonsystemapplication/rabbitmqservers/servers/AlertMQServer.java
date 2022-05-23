@@ -37,6 +37,9 @@ public class AlertMQServer {
     }
     @RabbitListener(queues = "alert.get")
     public String getAlerts(Message message){
-        return alertService.getAlerts();
+        String response = new String(message.getBody());
+        String[] pagination=new String[2];
+        pagination = gson.fromJson(response,String[].class);
+        return alertService.getAlerts(pagination[0], pagination[1]);
     }
 }

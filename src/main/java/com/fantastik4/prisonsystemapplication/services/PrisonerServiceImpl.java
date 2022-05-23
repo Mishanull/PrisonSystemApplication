@@ -1,7 +1,9 @@
 package com.fantastik4.prisonsystemapplication.services;
 
 import com.fantastik4.prisonsystemapplication.models.Prisoner;
+import com.fantastik4.prisonsystemapplication.models.PrisonersList;
 import com.google.gson.Gson;
+import com.sun.mail.iap.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -61,9 +63,9 @@ public class PrisonerServiceImpl implements PrisonerService{
     }
 
     @Override
-    public String getPrisoners() {
+    public String getPrisoners(String pageNumber, String pageSize) {
         try {
-            return restTemplate.getForObject("https://localhost:7150/Prisoner", String.class);
+            return restTemplate.getForObject("https://localhost:7150/Prisoner?pageNumber="+pageNumber+"&pageSize="+pageSize, PrisonersList.class);
         }
         catch (Exception e){
             e.printStackTrace();

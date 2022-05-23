@@ -7,8 +7,7 @@ public  interface PrisonerService {
     String createPrisoner(String newPrisoner);
     String removePrisoner(Long id);
     String getPrisonerById(Long prisonerId);
-    String getPrisoners();
     String updatePrisoner(String jsonPrisoner);
-
     String getPrisonerBySSN(String ssn);
+    String getPrisoners(String pageNumber, String pageSize);
 }

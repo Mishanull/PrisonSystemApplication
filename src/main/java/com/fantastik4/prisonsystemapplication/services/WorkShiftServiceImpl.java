@@ -92,7 +92,6 @@ public class WorkShiftServiceImpl implements WorkShiftService{
             e.printStackTrace();
             return "fail";
         }
-
     }
 
     @Override
