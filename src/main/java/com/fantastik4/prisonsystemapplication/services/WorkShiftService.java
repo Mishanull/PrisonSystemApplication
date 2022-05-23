@@ -13,5 +13,5 @@ public interface WorkShiftService {
     String getWorkShiftById(Long id);
     String updateWorkShift(String jsonWorkShift);
     String addGuardToWorkShift(String guardId, String shiftId);
-    String removeGuardFromWorkShift(String guardId, String shiftId);
+    String removeGuardFromWorkShift(long guardId, long shiftId);
 }
