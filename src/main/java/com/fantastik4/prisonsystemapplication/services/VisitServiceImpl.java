@@ -1,5 +1,6 @@
 package com.fantastik4.prisonsystemapplication.services;
 
+import com.fantastik4.prisonsystemapplication.models.Prisoner;
 import com.fantastik4.prisonsystemapplication.models.Visit;
 import com.fantastik4.prisonsystemapplication.models.enums.Status;
 import com.fantastik4.prisonsystemapplication.utils.PasswordGenerator;
@@ -39,11 +40,30 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public String CreateVisit(String jsonVisit) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> request = new HttpEntity<>(jsonVisit, headers);
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
-        return restTemplate.postForObject("https://localhost:7150/Visit", request, String.class);
+            Visit v = gson.fromJson(jsonVisit, Visit.class);
+            Prisoner p = restTemplate.getForObject("https://localhost:7150/Prisoner/ssn/"+v.getPrisonerSsn(), Prisoner.class);
+
+            if (p.points < 5) {
+                v.setStatus(Status.Denied);
+                jsonVisit = gson.toJson(v);
+                HttpEntity<String> request = new HttpEntity<>(jsonVisit, headers);
+                restTemplate.postForObject("https://localhost:7150/Visit", request, String.class);
+                return "denied";
+            }
+            else {
+                HttpEntity<String> request = new HttpEntity<>(jsonVisit, headers);
+                restTemplate.postForObject("https://localhost:7150/Visit", request, String.class);
+                return "success";
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
     }
 
     @Override
