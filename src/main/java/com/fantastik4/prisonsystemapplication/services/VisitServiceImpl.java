@@ -31,15 +31,14 @@ public class VisitServiceImpl implements VisitService {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-
             Visit v = gson.fromJson(jsonVisit, Visit.class);
-            Prisoner p = restTemplate.getForObject("https://localhost:7150/Prisoner/ssn/"+v.getPrisonerSsn(), Prisoner.class);
+            Prisoner p = gson.fromJson(restTemplate.getForObject("https://localhost:7150/Prisoner/ssn/{ssn}", String.class,v.getPrisonerSsn()),Prisoner.class);
 
             if (p.points < 5) {
-                v.setStatus(Status.Denied);
-                jsonVisit = gson.toJson(v);
                 HttpEntity<String> request = new HttpEntity<>(jsonVisit, headers);
                 restTemplate.postForObject("https://localhost:7150/Visit", request, String.class);
+                String[] status=new String[]{v.getId().toString(), Status.Denied.toString()};
+                UpdateVisitStatus(status);
                 return "denied";
             }
             else {

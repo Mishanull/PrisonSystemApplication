@@ -17,7 +17,6 @@ public class Prisoner  {
     public int ssn;
     public String crimeCommitted;
     public int points;
-//    public LocalDateTime entryDate;
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssX")
     public Date entryDate;
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssX")
