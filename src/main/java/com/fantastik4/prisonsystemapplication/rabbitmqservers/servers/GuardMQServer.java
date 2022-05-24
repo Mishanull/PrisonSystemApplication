@@ -68,4 +68,9 @@ public class GuardMQServer {
     public String updateGuard(Message message){
         return guardService.updateGuard(new String(message.getBody()));
     }
+    @RabbitListener(queues = "guard.getBySector")
+    public String getGuardBySector(Message message){
+        Long id=Long.parseLong(new String(message.getBody()));
+        return guardService.getGuardBySector(id);
+    }
 }

@@ -43,10 +43,16 @@ public class PrisonerMQServer {
 
     @RabbitListener(queues = "prisoners.get")
     public String getPrisoners(Message message){
-        String response = new String(message.getBody());
-        String[] pagination=new String[2];
-        pagination = gson.fromJson(response,String[].class);
-        return prisonerService.getPrisoners(pagination[0], pagination[1]);
+        try {
+            String response = new String(message.getBody());
+            String[] pagination = gson.fromJson(response, String[].class);
+            return prisonerService.getPrisoners(pagination[0], pagination[1]);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+
     }
 
     @RabbitListener(queues = "prisoner.getBySSN")

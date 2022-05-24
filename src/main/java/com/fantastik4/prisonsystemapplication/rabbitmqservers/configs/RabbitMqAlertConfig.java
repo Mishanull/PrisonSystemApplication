@@ -25,7 +25,14 @@ public class RabbitMqAlertConfig {
         return BindingBuilder.bind(getAlertsQueue()).to(alertExchange()).with("alert.get");
     }
     @Bean
-    public FanoutExchange fanoutExchange(){
+    public FanoutExchange allSectorsExchange(){
         return new FanoutExchange("guard.listen");
     }
+    @Bean
+    public FanoutExchange sector1Exchange(){return new FanoutExchange("guard.listen.sector1");}
+    @Bean
+    public FanoutExchange sector2Exchange(){return new FanoutExchange("guard.listen.sector2");}
+    @Bean
+    public FanoutExchange sector3Exchange(){return new FanoutExchange("guard.listen.sector3");}
+
 }

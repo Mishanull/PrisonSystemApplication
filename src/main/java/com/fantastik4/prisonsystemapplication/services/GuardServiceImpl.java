@@ -83,4 +83,15 @@ public class GuardServiceImpl implements GuardService{
             return "fail";
         }
     }
+
+    @Override
+    public String getGuardBySector(long id) {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Guard/{id}/Sector",String.class,id);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 }

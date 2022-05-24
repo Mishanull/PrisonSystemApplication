@@ -29,11 +29,13 @@ public class AlertMQServer {
     @RabbitListener(queues="alert.broadcast")
     public void broadcastAlert(Message message){
 
-        String alert=new String(message.getBody());
-        Alert a=gson.fromJson(alert,Alert.class);
-        System.out.println(a);
-        template.convertAndSend("guard.listen", "", alert);
-        alertService.createAlert(alert);
+        String request=new String(message.getBody());
+        String[] array=gson.fromJson(request,String[].class);
+        Long[] sectors=gson.fromJson(array[1],Long[].class);
+        if(sectors[0]==1) template.convertAndSend("guard.listen.sector1", "", array[0]);
+        if(sectors[1]==2) template.convertAndSend("guard.listen.sector2", "", array[0]);
+        if(sectors[2]==3) template.convertAndSend("guard.listen.sector3", "", array[0]);
+        alertService.createAlert(array[0]);
     }
     @RabbitListener(queues = "alert.get")
     public String getAlerts(Message message){
