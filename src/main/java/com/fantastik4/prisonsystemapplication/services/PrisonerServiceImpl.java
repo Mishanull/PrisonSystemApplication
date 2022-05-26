@@ -1,6 +1,7 @@
 package com.fantastik4.prisonsystemapplication.services;
 
 import com.fantastik4.prisonsystemapplication.models.Prisoner;
+import com.fantastik4.prisonsystemapplication.utils.PasswordGenerator;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -64,6 +65,28 @@ public class PrisonerServiceImpl implements PrisonerService{
     public String getPrisoners(String pageNumber, String pageSize) {
         try {
             return restTemplate.getForObject("https://localhost:7150/Prisoner?pageNumber="+pageNumber+"&pageSize="+pageSize, String.class);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String getPrisonersCount() {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Prisoner/count", String.class);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String getPrisonersBySector(String s, String s1, String s2) {
+        try {
+            return restTemplate.getForObject("https://localhost:7150/Prisoner/sector?pageNumber=" + s + "&pageSize=" + s1 + "&sectorId=" + s2, String.class);
         }
         catch (Exception e){
             e.printStackTrace();

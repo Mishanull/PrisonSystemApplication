@@ -74,5 +74,22 @@ public class RabbitMQPrisonerConfig {
     public Binding prisonerSSNBinding(){
         return BindingBuilder.bind(prisonerSSNQueue()).to(prisonerExchange()).with("prisoner.getBySSN");
     }
+    @Bean
+    public Queue prisonerCountQueue(){
+        return new Queue("prisoners.count");
+    }
+    @Bean
+    public Binding prisonerCountBinding(){
+        return BindingBuilder.bind(prisonerCountQueue()).to(prisonerExchange()).with("prisoners.count");
+    }
+    @Bean
+    public Queue prisonersBySectorQueue(){
+        return new Queue("prisoners.getBySector");
+    }
+    @Bean
+    public Binding prisonersBySectorBinding(){
+        return BindingBuilder.bind(prisonersBySectorQueue()).to(prisonerExchange()).with("prisoners.getBySector");
+    }
+
 
 }

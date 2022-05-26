@@ -61,4 +61,14 @@ public class PrisonerMQServer {
         String p=prisonerService.getPrisonerBySSN(SSN);
         return p;
     }
+    @RabbitListener(queues = "prisoners.count")
+    public String getPrisonersCount(){
+        return prisonerService.getPrisonersCount();
+    }
+    @RabbitListener(queues = "prisoners.getBySector")
+    public String getPrisonersBySector(Message message){
+        String response = new String(message.getBody());
+        String[] toArray = gson.fromJson(response, String[].class);
+        return prisonerService.getPrisonersBySector(toArray[0],toArray[1],toArray[2]);
+    }
 }
