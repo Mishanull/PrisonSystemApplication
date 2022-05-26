@@ -112,7 +112,7 @@ public class PrisonerServiceImpl implements PrisonerService{
             request[0]=idAndPoints[0];
             request[1]=idAndPoints[1];
 
-            restTemplate.patchForObject("https://localhost:7150/Visit", request, String.class);
+            restTemplate.patchForObject("https://localhost:7150/Prisoner/addPoints", request, String.class);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();
