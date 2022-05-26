@@ -1,4 +1,4 @@
-package com.fantastik4.prisonsystemapplication.rabbitmqserver.config;
+package com.fantastik4.prisonsystemapplication.rabbitmqservers.configs;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMqSectorConfig {
+public class RabbitMQSectorConfig {
     @Bean
     public DirectExchange sectorExchange(){
         return new DirectExchange("sector.exchange");

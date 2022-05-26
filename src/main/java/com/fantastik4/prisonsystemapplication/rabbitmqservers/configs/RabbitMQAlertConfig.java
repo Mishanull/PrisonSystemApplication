@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMqAlertConfig {
+public class RabbitMQAlertConfig {
     @Bean
     public DirectExchange alertExchange(){return new DirectExchange("alert.exchange");}
     @Bean

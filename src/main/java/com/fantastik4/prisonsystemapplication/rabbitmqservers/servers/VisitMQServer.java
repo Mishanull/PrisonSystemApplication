@@ -9,8 +9,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class VisitMQServer {
     private VisitService visitService;
@@ -27,7 +25,7 @@ public class VisitMQServer {
     @RabbitListener(queues = "visit.add")
     public String CreateVisit(Message message){
         String jsonVisit = new String(message.getBody());
-        String response = visitService.CreateVisit(jsonVisit);
+        String response = visitService.createVisit(jsonVisit);
 
         Visit v = gson.fromJson(jsonVisit, Visit.class);
         if (response.equals("success")){
@@ -57,13 +55,13 @@ public class VisitMQServer {
         String response = new String(message.getBody());
         String[] pagination;
         pagination = gson.fromJson(response,String[].class);
-        return visitService.GetVisits(pagination[0],pagination[1]);
+        return visitService.getVisits(pagination[0],pagination[1]);
     }
 
     @RabbitListener(queues = "visit.getByCode")
     String GetVisitByAccessCode(Message message){
         String code = new String(message.getBody());
-        return visitService.GetVisitByAccessCode(code);
+        return visitService.getVisitByAccessCode(code);
     }
 
     @RabbitListener(queues = "visit.update")
@@ -73,7 +71,7 @@ public class VisitMQServer {
             String response = new String(message.getBody());
             String[] strArray;
             strArray=gson.fromJson(response,String[].class);
-            return visitService.UpdateVisitStatus(strArray);
+            return visitService.updateVisitStatus(strArray);
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";

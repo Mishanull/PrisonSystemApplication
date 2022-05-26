@@ -1,4 +1,4 @@
-package com.fantastik4.prisonsystemapplication.rabbitmqserver.server;
+package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
 import com.fantastik4.prisonsystemapplication.services.SectorService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
