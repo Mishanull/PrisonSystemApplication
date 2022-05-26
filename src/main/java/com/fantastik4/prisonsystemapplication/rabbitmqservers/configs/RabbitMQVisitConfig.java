@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMqVisitConfig {
+public class RabbitMQVisitConfig {
     @Bean
     public DirectExchange visitExchange(){
         return new DirectExchange("visit.exchange");

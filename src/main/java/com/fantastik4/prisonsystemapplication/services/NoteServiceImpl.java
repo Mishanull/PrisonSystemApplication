@@ -21,7 +21,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public String AddNote(String[] prisonerIdAndText) {
+    public String addNote(String[] prisonerIdAndText) {
         try {
             String[] request = new String[2];
             request[0] = prisonerIdAndText[0];
@@ -36,7 +36,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public String RemoveNote (long noteId) {
+    public String removeNote(long noteId) {
         try {
             restTemplate.delete("https://localhost:7150/Note/{noteId}", noteId);
             return "success";
@@ -47,7 +47,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public String UpdateNote(String note) {
+    public String updateNote(String note) {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);

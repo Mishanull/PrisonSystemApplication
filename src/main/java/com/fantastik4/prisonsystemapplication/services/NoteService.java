@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface NoteService {
-    String AddNote(String[] prisonerIdAndText);
-    String RemoveNote(long noteId);
-    String UpdateNote(String note);
+    String addNote(String[] prisonerIdAndText);
+    String removeNote(long noteId);
+    String updateNote(String note);
 }
