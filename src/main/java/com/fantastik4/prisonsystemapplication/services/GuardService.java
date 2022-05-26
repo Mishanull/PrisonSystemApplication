@@ -10,6 +10,8 @@ public interface GuardService {
     String updateGuard(String jsonGuard);
     String getGuardById(Long guardId);
     String getGuards();
-
     String getGuardBySector(long id);
+    String GetGuardsPerSectToday(long sectorId);
+    String GetNumGuardsPerSect();
+    String GetNumGuardsPerSectToday();
 }

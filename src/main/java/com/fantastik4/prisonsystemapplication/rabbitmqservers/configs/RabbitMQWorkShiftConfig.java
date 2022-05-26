@@ -64,4 +64,10 @@ public class RabbitMQWorkShiftConfig {
     public Binding removeGuardFromWorkShiftBinding(){
         return BindingBuilder.bind(removeGuardFromWorkShiftQueue()).to(workShiftExchange()).with("workShift.removeGuard");
     }
+    @Bean
+    public Queue GetWorkShiftByGuardIdAsyncQueue(){return new Queue("workShift.getByGuardId");}
+    @Bean
+    public Binding GetWorkShiftByGuardIdAsyncBinding(){
+        return BindingBuilder.bind(GetWorkShiftByGuardIdAsyncQueue()).to(workShiftExchange()).with("workShift.getByGuardId");
+    }
 }

@@ -25,6 +25,14 @@ public class RabbitMqAlertConfig {
         return BindingBuilder.bind(getAlertsQueue()).to(alertExchange()).with("alert.get");
     }
     @Bean
+    public Queue GetAlertsTodayQueue(){
+        return new Queue("alert.getNum");
+    }
+    @Bean
+    public Binding GetAlertsTodayBinding(){
+        return BindingBuilder.bind(GetAlertsTodayQueue()).to(alertExchange()).with("alert.getNum");
+    }
+    @Bean
     public FanoutExchange allSectorsExchange(){
         return new FanoutExchange("guard.listen");
     }

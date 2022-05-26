@@ -24,7 +24,6 @@ public class AlertServiceImpl implements AlertService {
     public String getAlerts(String pageNumber, String pageSize) {
         try{
             String response=restTemplate.getForObject("https://localhost:7150/Alert?pageNumber="+pageNumber+"&pageSize="+pageSize, String.class);
-            List<Alert> alertList=gson.fromJson(response,List.class);
             return response;
         }
         catch (Exception e){
@@ -44,6 +43,17 @@ public class AlertServiceImpl implements AlertService {
         }
         catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String GetAlertsToday() {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Alert/alertsToday", String.class);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
         }
     }
 }

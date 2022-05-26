@@ -94,4 +94,37 @@ public class GuardServiceImpl implements GuardService{
             return "fail";
         }
     }
+
+    @Override
+    public String GetGuardsPerSectToday(long sectorId) {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Guard/guardsSectorToday{sectorId:long}",String.class,sectorId);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String GetNumGuardsPerSect() {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Guard/numPerSector", String.class);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String GetNumGuardsPerSectToday() {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Guard/numPerSectorToday", String.class);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 }

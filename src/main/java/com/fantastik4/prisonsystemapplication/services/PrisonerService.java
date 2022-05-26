@@ -10,4 +10,6 @@ public  interface PrisonerService {
     String updatePrisoner(String jsonPrisoner);
     String getPrisonerBySSN(String ssn);
     String getPrisoners(String pageNumber, String pageSize);
+    String GetNumPrisPerSectAsync();
+    String AddPointsToPrisoner(String[] idAndPoints);
 }

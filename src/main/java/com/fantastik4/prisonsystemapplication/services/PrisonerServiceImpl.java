@@ -72,6 +72,32 @@ public class PrisonerServiceImpl implements PrisonerService{
     }
 
     @Override
+    public String GetNumPrisPerSectAsync() {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Prisoner/numPerSect", String.class);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String AddPointsToPrisoner(String[] idAndPoints) {
+        try {
+            String[] request=new String[2];
+            request[0]=idAndPoints[0];
+            request[1]=idAndPoints[1];
+
+            restTemplate.patchForObject("https://localhost:7150/Visit", request, String.class);
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
     public String updatePrisoner(String jsonPrisoner) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

@@ -55,7 +55,7 @@ public class VisitMQServer {
     @RabbitListener(queues = "visit.get")
     public String GetVisits(Message message){
         String response = new String(message.getBody());
-        String[] pagination=new String[2];
+        String[] pagination;
         pagination = gson.fromJson(response,String[].class);
         return visitService.GetVisits(pagination[0],pagination[1]);
     }
@@ -71,12 +71,17 @@ public class VisitMQServer {
         try {
 
             String response = new String(message.getBody());
-            String[] strArray=new String[3];
+            String[] strArray;
             strArray=gson.fromJson(response,String[].class);
             return visitService.UpdateVisitStatus(strArray);
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";
         }
+    }
+
+    @RabbitListener(queues = "visit.getNumToday")
+    public String GetNumVisitsTodayAsync(){
+        return  visitService.GetNumVisitsTodayAsync();
     }
 }
