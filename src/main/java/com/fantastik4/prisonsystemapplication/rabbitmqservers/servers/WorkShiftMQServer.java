@@ -85,5 +85,11 @@ public class WorkShiftMQServer {
             return "fail";
         }
     }
+
+    @RabbitListener(queues = "workShift.getByGuardId")
+    public String GetWorkShiftByGuardIdAsync(Message message){
+        Long guardId=Long.parseLong(new String(message.getBody()));
+        return workShiftService.GetWorkShiftByGuardIdAsync(guardId);
+    }
 }
 

@@ -1,7 +1,6 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
 import com.fantastik4.prisonsystemapplication.models.Visit;
-import com.fantastik4.prisonsystemapplication.models.enums.Status;
 import com.fantastik4.prisonsystemapplication.services.EmailService;
 import com.fantastik4.prisonsystemapplication.services.VisitService;
 import com.fantastik4.prisonsystemapplication.utils.PasswordGenerator;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.fantastik4.prisonsystemapplication.models.enums.Status.Approved;
-
 @Component
 public class VisitMQServer {
     private VisitService visitService;
@@ -27,13 +24,13 @@ public class VisitMQServer {
     public VisitMQServer(VisitService visitService, EmailService emailService, Gson gson) {
         this.visitService = visitService;
         this.emailService = emailService;
-        this.gson = new Gson();
+        this.gson = gson;
     }
 
     @RabbitListener(queues = "visit.add")
     public String CreateVisit(Message message){
         String jsonVisit = new String(message.getBody());
-        String response = visitService.CreateVisit(jsonVisit);
+        String response = visitService.createVisit(jsonVisit);
 
         Visit v = gson.fromJson(jsonVisit, Visit.class);
         if (response.equals("success")){
@@ -61,15 +58,15 @@ public class VisitMQServer {
     @RabbitListener(queues = "visit.get")
     public String GetVisits(Message message){
         String response = new String(message.getBody());
-        String[] pagination=new String[2];
+        String[] pagination;
         pagination = gson.fromJson(response,String[].class);
-        return visitService.GetVisits(pagination[0],pagination[1]);
+        return visitService.getVisits(pagination[0],pagination[1]);
     }
 
     @RabbitListener(queues = "visit.getByCode")
     String GetVisitByAccessCode(Message message){
         String code = new String(message.getBody());
-        return visitService.GetVisitByAccessCode(code);
+        return visitService.getVisitByAccessCode(code);
     }
 
     @RabbitListener(queues = "visit.update")
@@ -96,5 +93,10 @@ public class VisitMQServer {
             e.printStackTrace();
             return "fail";
         }
+    }
+
+    @RabbitListener(queues = "visit.getNumToday")
+    public String GetNumVisitsTodayAsync(){
+        return  visitService.GetNumVisitsTodayAsync();
     }
 }

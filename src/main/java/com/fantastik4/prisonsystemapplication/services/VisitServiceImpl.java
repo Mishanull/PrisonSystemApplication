@@ -27,7 +27,7 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public String CreateVisit(String jsonVisit) {
+    public String createVisit(String jsonVisit) {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -38,7 +38,7 @@ public class VisitServiceImpl implements VisitService {
                 HttpEntity<String> request = new HttpEntity<>(jsonVisit, headers);
                 restTemplate.postForObject("https://localhost:7150/Visit", request, String.class);
                 String[] status=new String[]{v.getId().toString(), Status.Denied.toString()};
-                UpdateVisitStatus(status);
+                updateVisitStatus(status);
                 return "denied";
             }
             else {
@@ -54,7 +54,7 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public String GetVisits(String pageNumber, String pageSize) {
+    public String getVisits(String pageNumber, String pageSize) {
         try {
             return restTemplate.getForObject("https://localhost:7150/Visit?pageNumber="+pageNumber+"&pageSize="+pageSize, String.class);
         }
@@ -65,7 +65,7 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public String GetVisitByAccessCode(String code) {
+    public String getVisitByAccessCode(String code) {
         try {
             String visitJson = restTemplate.getForObject("https://localhost:7150/Visit/{accessCode}", String.class, code);
             assert visitJson != null;
@@ -83,12 +83,23 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public String UpdateVisitStatus(String[] request) {
+    public String updateVisitStatus(String[] statusAndId) {
         try {
 
             restTemplate.patchForObject("https://localhost:7150/Visit", request, String.class);
             return "success";
         } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String GetNumVisitsTodayAsync() {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Visit/visitsToday", String.class);
+        }
+        catch (Exception e){
             e.printStackTrace();
             return "fail";
         }

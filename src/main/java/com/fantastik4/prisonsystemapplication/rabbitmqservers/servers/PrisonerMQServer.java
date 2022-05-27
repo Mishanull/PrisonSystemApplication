@@ -52,14 +52,30 @@ public class PrisonerMQServer {
             e.printStackTrace();
             return "fail";
         }
-
     }
 
     @RabbitListener(queues = "prisoner.getBySSN")
     public String getPrisonerBySSN(Message message){
         String SSN=new String(message.getBody());
-        String p=prisonerService.getPrisonerBySSN(SSN);
-        return p;
+        return prisonerService.getPrisonerBySSN(SSN);
+    }
+
+    @RabbitListener(queues = "prisoner.getNumPerSector")
+    public String GetNumPrisPerSectAsync(){
+        return prisonerService.GetNumPrisPerSectAsync();
+    }
+
+    @RabbitListener(queues = "prisoner.addPoints")
+    public String AddPointsToPrisoner(Message message){
+        try {
+            String response = new String(message.getBody());
+            String[] strArray;
+            strArray=gson.fromJson(response,String[].class);
+            return prisonerService.AddPointsToPrisoner(strArray);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
     }
     @RabbitListener(queues = "prisoners.count")
     public String getPrisonersCount(){

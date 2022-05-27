@@ -1,10 +1,7 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
-import com.fantastik4.prisonsystemapplication.models.Alert;
 import com.fantastik4.prisonsystemapplication.services.AlertService;
-import com.fantastik4.prisonsystemapplication.services.GuardService;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -41,5 +38,10 @@ public class AlertMQServer {
         String[] pagination;
         pagination = gson.fromJson(response,String[].class);
         return alertService.getAlerts(pagination[0], pagination[1]);
+    }
+
+    @RabbitListener(queues = "alert.getNum")
+    public String GetAlertsToday(){
+        return alertService.GetAlertsToday();
     }
 }

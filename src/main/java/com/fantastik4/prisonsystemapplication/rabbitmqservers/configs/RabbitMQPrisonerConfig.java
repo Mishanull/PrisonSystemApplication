@@ -92,4 +92,19 @@ public class RabbitMQPrisonerConfig {
     }
 
 
+    @Bean
+    public Queue GetNumPrisPerSectAsyncQueue(){
+        return new Queue("prisoner.getNumPerSector");
+    }
+    @Bean
+    public Binding GetNumPrisPerSectAsyncBinding(){
+        return BindingBuilder.bind(GetNumPrisPerSectAsyncQueue()).to(prisonerExchange()).with("prisoner.getNumPerSector");
+    }@Bean
+    public Queue AddPointsToPrisonerQueue(){
+        return new Queue("prisoner.addPoints");
+    }
+    @Bean
+    public Binding AddPointsToPrisonerBinding(){
+        return BindingBuilder.bind(AddPointsToPrisonerQueue()).to(prisonerExchange()).with("prisoner.addPoints");
+    }
 }

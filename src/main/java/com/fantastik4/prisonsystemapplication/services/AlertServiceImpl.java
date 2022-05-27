@@ -44,4 +44,15 @@ public class AlertServiceImpl implements AlertService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String GetAlertsToday() {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Alert/alertsToday", String.class);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 }

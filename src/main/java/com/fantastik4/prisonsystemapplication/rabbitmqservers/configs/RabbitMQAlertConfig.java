@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMqAlertConfig {
+public class RabbitMQAlertConfig {
     @Bean
     public DirectExchange alertExchange(){return new DirectExchange("alert.exchange");}
     @Bean
@@ -23,6 +23,14 @@ public class RabbitMqAlertConfig {
     @Bean
     public Binding getAlertsBinding(){
         return BindingBuilder.bind(getAlertsQueue()).to(alertExchange()).with("alert.get");
+    }
+    @Bean
+    public Queue GetAlertsTodayQueue(){
+        return new Queue("alert.getNum");
+    }
+    @Bean
+    public Binding GetAlertsTodayBinding(){
+        return BindingBuilder.bind(GetAlertsTodayQueue()).to(alertExchange()).with("alert.getNum");
     }
     @Bean
     public FanoutExchange allSectorsExchange(){

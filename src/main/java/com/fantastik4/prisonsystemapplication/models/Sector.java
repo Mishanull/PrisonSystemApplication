@@ -7,6 +7,8 @@ public class Sector {
     private long id;
     private int Capacity;
 
+    private int OccupiedCells;
+
     public Sector(long id, int capacity) {
         this.id = id;
         Capacity = capacity;

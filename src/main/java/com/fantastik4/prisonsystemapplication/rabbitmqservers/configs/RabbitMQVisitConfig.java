@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMqVisitConfig {
+public class RabbitMQVisitConfig {
     @Bean
     public DirectExchange visitExchange(){
         return new DirectExchange("visit.exchange");
@@ -40,5 +40,11 @@ public class RabbitMqVisitConfig {
     @Bean
     public Binding UpdateVisitStatusBinding(){
         return BindingBuilder.bind(UpdateVisitStatusQueue()).to(visitExchange()).with("visit.update");
+    }
+    @Bean
+    public Queue GetNumVisitsTodayAsyncQueue(){return new Queue("visit.getNumToday");}
+    @Bean
+    public Binding GetNumVisitsTodayAsyncBinding(){
+        return BindingBuilder.bind(GetNumVisitsTodayAsyncQueue()).to(visitExchange()).with("visit.getNumToday");
     }
 }

@@ -104,4 +104,15 @@ public class WorkShiftServiceImpl implements WorkShiftService{
             return "fail";
         }
     }
+
+    @Override
+    public String GetWorkShiftByGuardIdAsync(long guardId) {
+        try {
+            return restTemplate.getForObject("https://localhost:7150/WorkShift/workShiftByGuard{guardId:long}", String.class, guardId);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 }

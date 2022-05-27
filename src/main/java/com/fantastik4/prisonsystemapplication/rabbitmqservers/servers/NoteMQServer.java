@@ -24,7 +24,7 @@ public class NoteMQServer {
             String response = new String(message.getBody());
             String[] strArray;
             strArray = gson.fromJson(response, String[].class);
-            return noteService.AddNote(strArray);
+            return noteService.addNote(strArray);
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";
@@ -34,12 +34,12 @@ public class NoteMQServer {
     @RabbitListener(queues = "note.remove")
     public String removeNote(Message message){
         Long noteId = Long.parseLong(new String(message.getBody()));
-        return noteService.RemoveNote(noteId);
+        return noteService.removeNote(noteId);
     }
 
     @RabbitListener(queues = "note.update")
     public String updateNote(Message message){
         String jsonNote = new String(message.getBody());
-        return noteService.UpdateNote(jsonNote);
+        return noteService.updateNote(jsonNote);
     }
 }
