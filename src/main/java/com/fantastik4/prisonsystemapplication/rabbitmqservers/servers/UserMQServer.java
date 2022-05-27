@@ -33,23 +33,5 @@ public class UserMQServer {
             return "error";
         }
     }
-//    @RabbitListener(queues ="login.confirm")
-//    public void logUser(Message message){
-//        Long id=Long.parseLong(new String(message.getBody()));
-//        User u=userService.getUserById(id);
-//        if(u.getRole().equals("guard")){
-//            loggedUsersService.LogGuard((Guard)u);
-//        }
-//        else loggedUsersService.LogWarden(u);
-//    }
-//    @RabbitListener(queues ="logout.confirm")
-//    public void logOutUser(Message message){
-//        Long id=Long.parseLong(new String(message.getBody()));
-//        User u=userService.getUserById(id);
-//        if(u.getRole().equals("guard")){
-//            loggedUsersService.LogOutGuard(u.getId());
-//        }
-//        else loggedUsersService.LogOutWarden();
-//    }
 
 }

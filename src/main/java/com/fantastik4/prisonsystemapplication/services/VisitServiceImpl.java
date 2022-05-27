@@ -83,15 +83,8 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public String UpdateVisitStatus(String[] statusAndId) {
+    public String UpdateVisitStatus(String[] request) {
         try {
-            String[] request=new String[3];
-            request[0]=statusAndId[0];
-            request[1]=statusAndId[1];
-            if(statusAndId[1].equalsIgnoreCase("approved")){
-                String accessCode= PasswordGenerator.generate(8);
-                request[2]=accessCode;
-            }
 
             restTemplate.patchForObject("https://localhost:7150/Visit", request, String.class);
             return "success";

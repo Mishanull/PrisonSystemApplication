@@ -1,15 +1,21 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
 import com.fantastik4.prisonsystemapplication.models.Visit;
+import com.fantastik4.prisonsystemapplication.models.enums.Status;
 import com.fantastik4.prisonsystemapplication.services.EmailService;
 import com.fantastik4.prisonsystemapplication.services.VisitService;
+import com.fantastik4.prisonsystemapplication.utils.PasswordGenerator;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
+import static com.fantastik4.prisonsystemapplication.models.enums.Status.Approved;
 
 @Component
 public class VisitMQServer {
@@ -21,7 +27,7 @@ public class VisitMQServer {
     public VisitMQServer(VisitService visitService, EmailService emailService, Gson gson) {
         this.visitService = visitService;
         this.emailService = emailService;
-        this.gson = gson;
+        this.gson = new Gson();
     }
 
     @RabbitListener(queues = "visit.add")
@@ -71,9 +77,21 @@ public class VisitMQServer {
         try {
 
             String response = new String(message.getBody());
-            String[] strArray=new String[3];
-            strArray=gson.fromJson(response,String[].class);
-            return visitService.UpdateVisitStatus(strArray);
+            String[] request=new String[3];
+            Visit visit=gson.fromJson(response, Visit.class);
+            switch (visit.getStatus()){
+                case Approved ->{
+                    String accessCode=PasswordGenerator.generate(10);
+                    visit.setAccessCode(accessCode);
+                    request[2]=accessCode;
+                    emailService.sendSimpleMessage(visit.getEmail(),"Visit Approved","Your visit for "
+                        + visit.getVisitDate().toString()+" has been approved. \n You need to be there at the exact hour you booked, no later than half an hour after, otherwise you will be denied entrance.\nThe access code is "+ visit.getAccessCode());}
+
+                case Denied -> emailService.sendSimpleMessage(visit.getEmail(), "Visit was denied","Your visit for " + visit.getVisitDate().toString() +" has been denied.\n Contact the prison management to find out why.");
+            }
+            request[0]=visit.getId().toString();
+            request[1]=visit.getStatus().toString();
+            return visitService.UpdateVisitStatus(request);
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";

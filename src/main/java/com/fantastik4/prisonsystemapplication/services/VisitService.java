@@ -8,5 +8,5 @@ public interface VisitService {
     String CreateVisit(String visit);
     String GetVisits(String pageNumber, String pageSize);
     String GetVisitByAccessCode(String code);
-    String UpdateVisitStatus(String[] statusAndId);
+    String UpdateVisitStatus(String[] idAndStatus);
 }

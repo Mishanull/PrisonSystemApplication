@@ -34,7 +34,6 @@ public class GuardMQServer {
         String hashedPassword = PasswordHasher.hash(newPassword);
         System.out.println("Hashed password: " + hashedPassword);
         newGuard.setPassword(hashedPassword);
-
         String response = guardService.createGuard(newGuard);
         if (!response.equals("fail")){
             new Thread(()->{
