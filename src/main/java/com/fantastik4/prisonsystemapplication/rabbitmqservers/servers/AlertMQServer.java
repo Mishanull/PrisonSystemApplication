@@ -1,5 +1,6 @@
 package com.fantastik4.prisonsystemapplication.rabbitmqservers.servers;
 
+import com.fantastik4.prisonsystemapplication.models.Alert;
 import com.fantastik4.prisonsystemapplication.services.AlertService;
 import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
@@ -22,14 +23,20 @@ public class AlertMQServer {
 
 
     @RabbitListener(queues="alert.broadcast")
-    public void broadcastAlert(Message message){
+    public String broadcastAlert(Message message){
         String request=new String(message.getBody());
-        String[] array=gson.fromJson(request,String[].class);
-        Long[] sectors=gson.fromJson(array[1],Long[].class);
-        if(sectors[0]==1) template.convertAndSend("guard.listen.sector1", "", array[0]);
-        if(sectors[1]==2) template.convertAndSend("guard.listen.sector2", "", array[0]);
-        if(sectors[2]==3) template.convertAndSend("guard.listen.sector3", "", array[0]);
-        alertService.createAlert(array[0]);
+        Alert alert=gson.fromJson(request,Alert.class);
+        try{
+        if(alert.getSectors()[0]) template.convertAndSend("guard.listen.sector1", "", request);
+        if(alert.getSectors()[1]) template.convertAndSend("guard.listen.sector2", "", request);
+        if(alert.getSectors()[1]) template.convertAndSend("guard.listen.sector3", "", request);
+        alertService.createAlert(request);
+        return "success";
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
     }
 
     @RabbitListener(queues = "alert.get")

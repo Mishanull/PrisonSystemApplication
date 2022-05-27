@@ -86,7 +86,7 @@ public class VisitServiceImpl implements VisitService {
     public String updateVisitStatus(String[] statusAndId) {
         try {
 
-            restTemplate.patchForObject("https://localhost:7150/Visit", request, String.class);
+            restTemplate.patchForObject("https://localhost:7150/Visit", statusAndId, String.class);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();

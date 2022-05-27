@@ -13,7 +13,7 @@ public class Alert implements Serializable {
     private String text;
     private Priority priority;
     private int durationInMinutes;
-
+    private boolean[] sectors =new boolean[3];
 
     public Alert() {
     }
@@ -48,5 +48,13 @@ public class Alert implements Serializable {
 
     public void setDurationInMinutes(int durationInMinutes) {
         this.durationInMinutes = durationInMinutes;
+    }
+
+    public boolean[] getSectors() {
+        return sectors;
+    }
+
+    public void setSectors(boolean[] sectors) {
+        this.sectors = sectors;
     }
 }

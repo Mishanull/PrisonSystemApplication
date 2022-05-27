@@ -88,7 +88,7 @@ public class VisitMQServer {
             }
             request[0]=visit.getId().toString();
             request[1]=visit.getStatus().toString();
-            return visitService.UpdateVisitStatus(request);
+            return visitService.updateVisitStatus(request);
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";
