@@ -34,11 +34,11 @@ public class VisitServiceImpl implements VisitService {
             Visit v = gson.fromJson(jsonVisit, Visit.class);
             Prisoner p = gson.fromJson(restTemplate.getForObject("https://localhost:7150/Prisoner/ssn/{ssn}", String.class,v.getPrisonerSsn()),Prisoner.class);
 
+
             if (p.points < 5) {
                 HttpEntity<String> request = new HttpEntity<>(jsonVisit, headers);
-                restTemplate.postForObject("https://localhost:7150/Visit", request, String.class);
-                String[] status=new String[]{v.getId().toString(), Status.Denied.toString()};
-                updateVisitStatus(status);
+                Visit replyVisit=gson.fromJson(restTemplate.postForObject("https://localhost:7150/Visit", request, String.class),Visit.class);
+                updateVisitStatus(new String[]{String.valueOf(replyVisit.getId()),Status.Denied.toString()});
                 return "denied";
             }
             else {

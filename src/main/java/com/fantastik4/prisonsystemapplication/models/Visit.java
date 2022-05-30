@@ -2,6 +2,7 @@ package com.fantastik4.prisonsystemapplication.models;
 
 import com.fantastik4.prisonsystemapplication.models.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
 public class Visit {
     private Long id;
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssX")
+    @JsonSetter
     private Date visitDate;
     private Status status;
     private String accessCode;
