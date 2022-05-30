@@ -11,7 +11,9 @@ public interface GuardService {
     String getGuardById(Long guardId);
     String getGuards();
     String getGuardBySector(long id);
-    String GetGuardsPerSectToday(long sectorId);
-    String GetNumGuardsPerSect();
-    String GetNumGuardsPerSectToday();
+    String getGuardsPerSectToday(long sectorId);
+    String getNumGuardsPerSect();
+    String getNumGuardsPerSectToday();
+    String isGuardAssigned(long guardId);
+    String isGuardWorking(long guardId);
 }

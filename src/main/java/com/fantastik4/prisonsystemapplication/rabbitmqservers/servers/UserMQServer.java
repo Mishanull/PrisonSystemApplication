@@ -25,12 +25,12 @@ public class UserMQServer {
     public String getUser(Message message){
         try {
             User user = userService.getUser(new String(message.getBody()));
-            if(user!=null) return gson.toJson(user);
-            else throw new Exception("User not retrieved yet");
+            assert user!=null;
+            return gson.toJson(user);
         }
         catch (Exception e){
             e.printStackTrace();
-            return "error";
+            return "fail";
         }
     }
 

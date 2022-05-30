@@ -87,4 +87,8 @@ public class PrisonerMQServer {
         String[] toArray = gson.fromJson(response, String[].class);
         return prisonerService.getPrisonersBySector(toArray[0],toArray[1],toArray[2]);
     }
+    @RabbitListener(queues = "prisoner.getLowBehaviour")
+    public String getPrisonersWithLowBehaviour(){
+        return prisonerService.getPrisonersWithLowBehaviour();
+    }
 }

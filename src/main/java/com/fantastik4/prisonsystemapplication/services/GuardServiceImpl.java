@@ -96,9 +96,9 @@ public class GuardServiceImpl implements GuardService{
     }
 
     @Override
-    public String GetGuardsPerSectToday(long sectorId) {
+    public String getGuardsPerSectToday(long sectorId) {
         try{
-            return restTemplate.getForObject("https://localhost:7150/Guard/guardsSectorToday{sectorId:long}",String.class,sectorId);
+            return restTemplate.getForObject("https://localhost:7150/Guard/guardsSectorToday/{sectorId:long}",String.class,sectorId);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -107,7 +107,7 @@ public class GuardServiceImpl implements GuardService{
     }
 
     @Override
-    public String GetNumGuardsPerSect() {
+    public String getNumGuardsPerSect() {
         try{
             return restTemplate.getForObject("https://localhost:7150/Guard/numPerSector", String.class);
         }
@@ -118,9 +118,31 @@ public class GuardServiceImpl implements GuardService{
     }
 
     @Override
-    public String GetNumGuardsPerSectToday() {
+    public String getNumGuardsPerSectToday() {
         try{
             return restTemplate.getForObject("https://localhost:7150/Guard/numPerSectorToday", String.class);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String isGuardAssigned(long guardId) {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Guard/assigned/{id:long}",String.class,guardId);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String isGuardWorking(long guardId) {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Guard/working/{id:long}",String.class,guardId);
         }
         catch (Exception e){
             e.printStackTrace();

@@ -121,6 +121,16 @@ public class PrisonerServiceImpl implements PrisonerService{
     }
 
     @Override
+    public String getPrisonersWithLowBehaviour() {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Prisoner/lowBehaviour", String.class);
+        }catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
     public String updatePrisoner(String jsonPrisoner) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

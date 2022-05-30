@@ -46,7 +46,7 @@ public class AlertServiceImpl implements AlertService {
     }
 
     @Override
-    public String GetAlertsToday() {
+    public String getAlertsToday() {
         try{
             return restTemplate.getForObject("https://localhost:7150/Alert/alertsToday", String.class);
         }

@@ -95,9 +95,20 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public String GetNumVisitsTodayAsync() {
+    public String getVisitsTodayAsync() {
         try{
             return restTemplate.getForObject("https://localhost:7150/Visit/visitsToday", String.class);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
+    @Override
+    public String getVisitsPending() {
+        try{
+            return restTemplate.getForObject("https://localhost:7150/Visit/visitsPending",String.class);
         }
         catch (Exception e){
             e.printStackTrace();

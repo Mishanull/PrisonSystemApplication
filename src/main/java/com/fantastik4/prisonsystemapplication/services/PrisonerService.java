@@ -14,4 +14,5 @@ public  interface PrisonerService {
     String getPrisonersBySector(String s, String s1, String s2);
     String GetNumPrisPerSectAsync();
     String AddPointsToPrisoner(String[] idAndPoints);
+    String getPrisonersWithLowBehaviour();
 }

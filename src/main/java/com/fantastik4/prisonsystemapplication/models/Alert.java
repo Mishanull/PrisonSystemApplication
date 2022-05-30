@@ -1,6 +1,5 @@
 package com.fantastik4.prisonsystemapplication.models;
 
-import com.fantastik4.prisonsystemapplication.models.enums.Priority;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +10,6 @@ public class Alert implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssX")
     private Date date;
     private String text;
-    private Priority priority;
     private int durationInMinutes;
     private boolean[] sectors =new boolean[3];
 
@@ -34,13 +32,7 @@ public class Alert implements Serializable {
         this.text = text;
     }
 
-    public Priority getPriority() {
-        return priority;
-    }
 
-    public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
 
     public int getDurationInMinutes() {
         return durationInMinutes;

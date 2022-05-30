@@ -49,6 +49,6 @@ public class AlertMQServer {
 
     @RabbitListener(queues = "alert.getNum")
     public String GetAlertsToday(){
-        return alertService.GetAlertsToday();
+        return alertService.getAlertsToday();
     }
 }

@@ -4,15 +4,11 @@ import com.fantastik4.prisonsystemapplication.models.Visit;
 import com.fantastik4.prisonsystemapplication.services.EmailService;
 import com.fantastik4.prisonsystemapplication.services.VisitService;
 import com.fantastik4.prisonsystemapplication.utils.PasswordGenerator;
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class VisitMQServer {
@@ -97,6 +93,10 @@ public class VisitMQServer {
 
     @RabbitListener(queues = "visit.getNumToday")
     public String GetNumVisitsTodayAsync(){
-        return  visitService.GetNumVisitsTodayAsync();
+        return  visitService.getVisitsTodayAsync();
+    }
+    @RabbitListener(queues = "visit.getPending")
+    public String GetPendingVisitsAsync(){
+        return  visitService.getVisitsPending();
     }
 }

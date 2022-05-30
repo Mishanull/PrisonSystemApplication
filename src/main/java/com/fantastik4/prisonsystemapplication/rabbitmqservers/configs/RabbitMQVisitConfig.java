@@ -47,4 +47,10 @@ public class RabbitMQVisitConfig {
     public Binding GetNumVisitsTodayAsyncBinding(){
         return BindingBuilder.bind(GetNumVisitsTodayAsyncQueue()).to(visitExchange()).with("visit.getNumToday");
     }
+    @Bean
+    public Queue GetVisitsPendingAsyncQueue(){return new Queue("visit.getPending");}
+    @Bean
+    public Binding GetVisitsPendingAsyncBinding(){
+        return BindingBuilder.bind(GetVisitsPendingAsyncQueue()).to(visitExchange()).with("visit.getPending");
+    }
 }

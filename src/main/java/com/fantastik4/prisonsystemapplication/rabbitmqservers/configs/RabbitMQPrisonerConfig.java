@@ -107,4 +107,11 @@ public class RabbitMQPrisonerConfig {
     public Binding AddPointsToPrisonerBinding(){
         return BindingBuilder.bind(AddPointsToPrisonerQueue()).to(prisonerExchange()).with("prisoner.addPoints");
     }
+    @Bean public Queue getPrisonersWithLowBehaviour(){
+        return new Queue("prisoner.getLowBehaviour");
+    }
+    @Bean
+    public Binding getPrisonerWithLowBehaviourBinding(){
+        return BindingBuilder.bind(getPrisonersWithLowBehaviour()).to(prisonerExchange()).with("prisoner.getLowBehaviour");
+    }
 }
