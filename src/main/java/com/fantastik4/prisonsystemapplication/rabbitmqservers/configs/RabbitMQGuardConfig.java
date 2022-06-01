@@ -106,4 +106,13 @@ public class RabbitMQGuardConfig {
     public Binding isGuardWorkingBinding(){
         return BindingBuilder.bind(isGuardWorkingQueue()).to(guardExchange()).with("guard.isWorking");
     }
+
+    @Bean
+    public Queue changePasswordQueue(){
+        return new Queue("guard.changePassword");
+    }
+    @Bean
+    public Binding changePasswordBinding(){
+        return BindingBuilder.bind(changePasswordQueue()).to(guardExchange()).with("guard.changePassword");
+    }
 }

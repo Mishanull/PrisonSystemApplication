@@ -100,4 +100,20 @@ public class GuardMQServer {
         return guardService.isGuardWorking(guardId);
     }
 
+    @RabbitListener(queues = "guard.changePassword")
+    public String changePassword(Message message){
+        String jsonGuard = new String(message.getBody());
+        Guard guard = gson.fromJson(jsonGuard, Guard.class);
+
+        String response = guardService.updateGuard(jsonGuard);
+        if (!response.equals("fail")){
+            new Thread(()->{
+                emailService.sendSimpleMessage(guard.getEmail(),
+                        "Your password was changed successfully", "Your new log in credentials are:" +
+                                "\n - username: "+guard.getUsername()+
+                                "\n - password: "+guard.getPassword());
+            }).start();
+        }
+        return response;
+    }
 }
