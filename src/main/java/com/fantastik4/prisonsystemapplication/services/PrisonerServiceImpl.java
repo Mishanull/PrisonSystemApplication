@@ -95,7 +95,7 @@ public class PrisonerServiceImpl implements PrisonerService{
     }
 
     @Override
-    public String getNumPrisPerSectAsync() {
+    public String getNumPrisPerSect() {
         try{
             return restTemplate.getForObject("https://localhost:7150/Prisoner/numPerSect", String.class);
         }
@@ -106,7 +106,7 @@ public class PrisonerServiceImpl implements PrisonerService{
     }
 
     @Override
-    public String AddPointsToPrisoner(String[] idAndPoints) {
+    public String addPointsToPrisoner(String[] idAndPoints) {
         try {
             String[] request=new String[2];
             request[0]=idAndPoints[0];

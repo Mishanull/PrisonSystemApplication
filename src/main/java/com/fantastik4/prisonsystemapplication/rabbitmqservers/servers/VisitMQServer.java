@@ -92,11 +92,11 @@ public class VisitMQServer {
     }
 
     @RabbitListener(queues = "visit.getNumToday")
-    public String getNumVisitsTodayAsync(){
-        return  visitService.getVisitsTodayAsync();
+    public String getNumVisitsToday(){
+        return  visitService.getVisitsToday();
     }
     @RabbitListener(queues = "visit.getPending")
-    public String getPendingVisitsAsync(){
+    public String getPendingVisits(){
         return  visitService.getVisitsPending();
     }
 }
