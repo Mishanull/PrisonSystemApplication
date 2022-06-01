@@ -62,7 +62,7 @@ public class PrisonerMQServer {
 
     @RabbitListener(queues = "prisoner.getNumPerSector")
     public String GetNumPrisPerSectAsync(){
-        return prisonerService.GetNumPrisPerSectAsync();
+        return prisonerService.getNumPrisPerSectAsync();
     }
 
     @RabbitListener(queues = "prisoner.addPoints")

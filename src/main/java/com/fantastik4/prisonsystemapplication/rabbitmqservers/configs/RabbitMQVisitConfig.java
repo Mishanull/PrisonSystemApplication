@@ -15,10 +15,10 @@ public class RabbitMQVisitConfig {
     }
 
     @Bean
-    public Queue CreateVisitQueue(){return new Queue("visit.add");}
+    public Queue createVisitQueue(){return new Queue("visit.add");}
     @Bean
-    public Binding CreateVisitBinding(){
-        return BindingBuilder.bind(CreateVisitQueue()).to(visitExchange()).with("visit.add");
+    public Binding createVisitBinding(){
+        return BindingBuilder.bind(createVisitQueue()).to(visitExchange()).with("visit.add");
     }
 
     @Bean
@@ -44,7 +44,7 @@ public class RabbitMQVisitConfig {
     @Bean
     public Queue GetNumVisitsTodayAsyncQueue(){return new Queue("visit.getNumToday");}
     @Bean
-    public Binding GetNumVisitsTodayAsyncBinding(){
+    public Binding getNumVisitsTodayAsyncBinding(){
         return BindingBuilder.bind(GetNumVisitsTodayAsyncQueue()).to(visitExchange()).with("visit.getNumToday");
     }
     @Bean

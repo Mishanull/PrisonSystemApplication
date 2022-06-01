@@ -24,7 +24,7 @@ public class VisitMQServer {
     }
 
     @RabbitListener(queues = "visit.add")
-    public String CreateVisit(Message message){
+    public String createVisit(Message message){
         String jsonVisit = new String(message.getBody());
         String response = visitService.createVisit(jsonVisit);
 
@@ -52,7 +52,7 @@ public class VisitMQServer {
     }
 
     @RabbitListener(queues = "visit.get")
-    public String GetVisits(Message message){
+    public String getVisits(Message message){
         String response = new String(message.getBody());
         String[] pagination;
         pagination = gson.fromJson(response,String[].class);
@@ -60,13 +60,13 @@ public class VisitMQServer {
     }
 
     @RabbitListener(queues = "visit.getByCode")
-    String GetVisitByAccessCode(Message message){
+    String getVisitByAccessCode(Message message){
         String code = new String(message.getBody());
         return visitService.getVisitByAccessCode(code);
     }
 
     @RabbitListener(queues = "visit.update")
-    String UpdateVisitStatus(Message message){
+    String updateVisitStatus(Message message){
         try {
 
             String response = new String(message.getBody());
@@ -92,11 +92,11 @@ public class VisitMQServer {
     }
 
     @RabbitListener(queues = "visit.getNumToday")
-    public String GetNumVisitsTodayAsync(){
+    public String getNumVisitsTodayAsync(){
         return  visitService.getVisitsTodayAsync();
     }
     @RabbitListener(queues = "visit.getPending")
-    public String GetPendingVisitsAsync(){
+    public String getPendingVisitsAsync(){
         return  visitService.getVisitsPending();
     }
 }
