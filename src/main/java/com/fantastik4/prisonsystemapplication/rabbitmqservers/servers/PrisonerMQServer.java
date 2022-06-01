@@ -61,17 +61,17 @@ public class PrisonerMQServer {
     }
 
     @RabbitListener(queues = "prisoner.getNumPerSector")
-    public String GetNumPrisPerSectAsync(){
-        return prisonerService.GetNumPrisPerSectAsync();
+    public String getNumPrisPerSect(){
+        return prisonerService.getNumPrisPerSect();
     }
 
     @RabbitListener(queues = "prisoner.addPoints")
-    public String AddPointsToPrisoner(Message message){
+    public String addPointsToPrisoner(Message message){
         try {
             String response = new String(message.getBody());
             String[] strArray;
             strArray=gson.fromJson(response,String[].class);
-            return prisonerService.AddPointsToPrisoner(strArray);
+            return prisonerService.addPointsToPrisoner(strArray);
         } catch (Exception e) {
             e.printStackTrace();
             return "fail";

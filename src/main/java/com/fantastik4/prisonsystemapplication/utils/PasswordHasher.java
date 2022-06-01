@@ -1,6 +1,5 @@
 package com.fantastik4.prisonsystemapplication.utils;
 
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 

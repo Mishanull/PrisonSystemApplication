@@ -93,19 +93,19 @@ public class RabbitMQPrisonerConfig {
 
 
     @Bean
-    public Queue GetNumPrisPerSectAsyncQueue(){
+    public Queue getNumPrisPerSectAsyncQueue(){
         return new Queue("prisoner.getNumPerSector");
     }
     @Bean
-    public Binding GetNumPrisPerSectAsyncBinding(){
-        return BindingBuilder.bind(GetNumPrisPerSectAsyncQueue()).to(prisonerExchange()).with("prisoner.getNumPerSector");
+    public Binding getNumPrisPerSectAsyncBinding(){
+        return BindingBuilder.bind(getNumPrisPerSectAsyncQueue()).to(prisonerExchange()).with("prisoner.getNumPerSector");
     }@Bean
-    public Queue AddPointsToPrisonerQueue(){
+    public Queue addPointsToPrisonerQueue(){
         return new Queue("prisoner.addPoints");
     }
     @Bean
-    public Binding AddPointsToPrisonerBinding(){
-        return BindingBuilder.bind(AddPointsToPrisonerQueue()).to(prisonerExchange()).with("prisoner.addPoints");
+    public Binding addPointsToPrisonerBinding(){
+        return BindingBuilder.bind(addPointsToPrisonerQueue()).to(prisonerExchange()).with("prisoner.addPoints");
     }
     @Bean public Queue getPrisonersWithLowBehaviour(){
         return new Queue("prisoner.getLowBehaviour");

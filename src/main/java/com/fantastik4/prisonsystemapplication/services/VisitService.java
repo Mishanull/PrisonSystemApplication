@@ -5,6 +5,6 @@ public interface VisitService {
     String getVisits(String pageNumber, String pageSize);
     String getVisitByAccessCode(String code);
     String updateVisitStatus(String[] statusAndId);
-    String getVisitsTodayAsync();
+    String getVisitsToday();
     String getVisitsPending();
 }

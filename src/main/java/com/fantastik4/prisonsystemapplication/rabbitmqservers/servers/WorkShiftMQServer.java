@@ -20,7 +20,7 @@ public class WorkShiftMQServer {
     }
 
     @RabbitListener(queues = "workShift.add")
-    public String CreateWorkShiftAsync(Message message){
+    public String createWorkShift(Message message){
         try {
             String jsonShift = new String(message.getBody());
             return workShiftService.createWorkShift(jsonShift);
@@ -31,13 +31,13 @@ public class WorkShiftMQServer {
     }
 
     @RabbitListener(queues = "workShift.remove")
-    public String RemoveWorkShiftAsync(Message message){
+    public String removeWorkShift(Message message){
         Long id = Long.parseLong(new String(message.getBody()));
         return workShiftService.removeWorkShift(id);
     }
 
     @RabbitListener(queues = "workShift.get")
-    public String GetWorkShiftsAsync(){
+    public String getWorkShifts(){
         return workShiftService.getWorkShifts();
     }
 
@@ -59,7 +59,7 @@ public class WorkShiftMQServer {
     }
 
     @RabbitListener(queues = "workShift.addGuard")
-    String addGuardToWorkShiftAsync(Message message) {
+    String addGuardToWorkShift(Message message) {
         try {
             String response = new String(message.getBody());
             String[] strArray;
@@ -72,7 +72,7 @@ public class WorkShiftMQServer {
     }
 
     @RabbitListener(queues = "workShift.removeGuard")
-    String removeGuardFromWorkShiftAsync(Message message) {
+    String removeGuardFromWorkShift(Message message) {
         try {
             String ids = new String(message.getBody());
             char[] idsArray = ids.toCharArray();
@@ -87,9 +87,9 @@ public class WorkShiftMQServer {
     }
 
     @RabbitListener(queues = "workShift.getByGuardId")
-    public String GetWorkShiftByGuardIdAsync(Message message){
+    public String getWorkShiftByGuardId(Message message){
         Long guardId=Long.parseLong(new String(message.getBody()));
-        return workShiftService.getWorkShiftByGuardIdAsync(guardId);
+        return workShiftService.getWorkShiftByGuardId(guardId);
     }
 }
 

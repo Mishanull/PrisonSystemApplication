@@ -75,18 +75,18 @@ public class GuardMQServer {
     }
 
     @RabbitListener(queues = "guard.getPerSectorToday")
-    public String GetGuardsPerSectToday(Message message){
+    public String getGuardsPerSectToday(Message message){
         Long sectorId=Long.parseLong(new String(message.getBody()));
         return guardService.getGuardsPerSectToday(sectorId);
     }
 
     @RabbitListener(queues = "guard.getNumPerSector")
-    public String GetNumGuardsPerSect(){
+    public String getNumGuardsPerSect(){
         return guardService.getNumGuardsPerSect();
     }
 
     @RabbitListener(queues = "guard.getNumPerSectorToday")
-    public String GetNumGuardsPerSectToday(){
+    public String getNumGuardsPerSectToday(){
         return guardService.getNumGuardsPerSectToday();
     }
     @RabbitListener(queues = "guard.isAssigned")

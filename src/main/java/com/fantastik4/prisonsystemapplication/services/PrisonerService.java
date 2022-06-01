@@ -12,7 +12,7 @@ public  interface PrisonerService {
     String getPrisoners(String pageNumber, String pageSize);
     String getPrisonersCount();
     String getPrisonersBySector(String s, String s1, String s2);
-    String GetNumPrisPerSectAsync();
-    String AddPointsToPrisoner(String[] idAndPoints);
+    String getNumPrisPerSect();
+    String addPointsToPrisoner(String[] idAndPoints);
     String getPrisonersWithLowBehaviour();
 }

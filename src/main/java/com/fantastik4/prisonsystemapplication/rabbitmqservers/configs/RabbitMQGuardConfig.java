@@ -67,20 +67,20 @@ public class RabbitMQGuardConfig {
         return BindingBuilder.bind(guardSectorQueue()).to(guardExchange()).with("guard.getBySector");
     }
     @Bean
-    public Queue GetGuardsPerSectTodayQueue(){
+    public Queue getGuardsPerSectTodayQueue(){
         return new Queue("guard.getPerSectorToday");
     }
     @Bean
-    public Binding GetGuardsPerSectTodayBinding(){
-        return BindingBuilder.bind(GetGuardsPerSectTodayQueue()).to(guardExchange()).with("guard.getPerSectorToday");
+    public Binding getGuardsPerSectTodayBinding(){
+        return BindingBuilder.bind(getGuardsPerSectTodayQueue()).to(guardExchange()).with("guard.getPerSectorToday");
     }
     @Bean
-    public Queue GetNumGuardsPerSectQueue(){
+    public Queue getNumGuardsPerSectQueue(){
         return new Queue("guard.getNumPerSector");
     }
     @Bean
-    public Binding GetNumGuardsPerSectBinding(){
-        return BindingBuilder.bind(GetNumGuardsPerSectQueue()).to(guardExchange()).with("guard.getNumPerSector");
+    public Binding getNumGuardsPerSectBinding(){
+        return BindingBuilder.bind(getNumGuardsPerSectQueue()).to(guardExchange()).with("guard.getNumPerSector");
     }
     @Bean
     public Queue isGuardAssignedQueue(){
@@ -91,12 +91,12 @@ public class RabbitMQGuardConfig {
         return BindingBuilder.bind(isGuardAssignedQueue()).to(guardExchange()).with("guard.isAssigned");
     }
     @Bean
-    public Queue GetNumGuardsPerSectTodayQueue(){
+    public Queue getNumGuardsPerSectTodayQueue(){
         return new Queue("guard.getNumPerSectorToday");
     }
     @Bean
-    public Binding GetNumGuardsPerSectTodayBinding(){
-        return BindingBuilder.bind(GetNumGuardsPerSectTodayQueue()).to(guardExchange()).with("guard.getNumPerSectorToday");
+    public Binding getNumGuardsPerSectTodayBinding(){
+        return BindingBuilder.bind(getNumGuardsPerSectTodayQueue()).to(guardExchange()).with("guard.getNumPerSectorToday");
     }
     @Bean
     public Queue isGuardWorkingQueue(){
