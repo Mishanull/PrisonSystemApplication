@@ -78,9 +78,9 @@ public class VisitMQServer {
                     visit.setAccessCode(accessCode);
                     request[2]=accessCode;
                     emailService.sendSimpleMessage(visit.getEmail(),"Visit Approved","Your visit for "
-                        + visit.getVisitDate().toString()+" has been approved. \n You need to be there at the exact hour you booked, no later than half an hour after, otherwise you will be denied entrance.\nThe access code is "+ visit.getAccessCode());}
+                        + visit.getVisitDate().toGMTString()+" has been approved. \n You need to be there at the exact hour you booked, no later than half an hour after, otherwise you will be denied entrance.\nThe access code is "+ visit.getAccessCode());}
 
-                case Denied -> emailService.sendSimpleMessage(visit.getEmail(), "Visit was denied","Your visit for " + visit.getVisitDate().toString() +" has been denied.\n Contact the prison management to find out why.");
+                case Denied -> emailService.sendSimpleMessage(visit.getEmail(), "Visit was denied","Your visit for " + visit.getVisitDate().toGMTString() +" has been denied.\n Contact the prison management to find out why.");
             }
             request[0]=visit.getId().toString();
             request[1]=visit.getStatus().toString();
